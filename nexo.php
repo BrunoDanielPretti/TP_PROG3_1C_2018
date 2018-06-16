@@ -59,14 +59,10 @@
 
 //---------------------------------  USUARIO --------------------------------------------------//
 
-    $app->post('/php/iniciarUsuario', function(Request $request, Response $response){
-        //$usuario = $request->getParam("usuario");
-        //$clave   = $request->getParam("clave");
+    $app->post('/php/iniciarUsuario', function(Request $request, Response $response){        
         $ArrayDeParametros = $request->getParsedBody();
         $usuario = $ArrayDeParametros['usuario'];
-        $clave   = $ArrayDeParametros['clave'];
-
-        //var_dump($ArrayDeParametros);
+        $clave   = $ArrayDeParametros['clave'];    
 
         $resultado = Usuario::BuscarPorSesion($usuario, $clave);      
         

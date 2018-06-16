@@ -5,12 +5,13 @@
     class AutentificadorJWT{
         private static $claveSecreta = "acaVaUnaClaveSecreta";
         private static $tipoEncriptacion = 'HS256';
+        private static $exptime = 10;
 
         public static function CrearToken($datos){
             $ahora = time();
             $playLoad = array(              //el Token
                 'IAT' => $ahora,
-                'EXP' => $ahora + 60,
+                'EXP' => $ahora + self::$exptime,
                 'DATA' => $datos,
                 'APP' => "apirest JWT"
             );

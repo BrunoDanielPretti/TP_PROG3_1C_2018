@@ -16,9 +16,9 @@
     }
 }
 {   //------------------------- SESION ------------------//
-    function Refresh_Nav(){
+    function Refresh_Nav(){          //Ni puta idea de para q era esto
+        
         //$("#btnSesion").html("Sesion Iniciada");
-
         $.ajax({
             url: "partes/navMenus.php",
             method: "POST",        
@@ -48,7 +48,7 @@
                 datos = JSON.parse(datos);
                 localStorage.setItem("token", datos['token']);
                 $("#nav-1").html(datos['nav']);
-                Refresh_Nav();                
+                //Refresh_Nav();                
             }        
         })
     }
