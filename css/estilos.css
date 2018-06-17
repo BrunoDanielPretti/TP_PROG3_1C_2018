@@ -1,14 +1,12 @@
 body {
-    background-color: rgb(34, 33, 32);
-    
-   /*padding-top: 70px;*/
+    background-color: rgb(34, 33, 32);    
 }
-
 
 ::selection{
     background: #8d78559d;
     color: #c9c6c6;
 }
+
 
 input[type="text"]{
     background-color: rgb(34, 33, 32);
@@ -21,37 +19,39 @@ input[type="password"]{
     border-color: rgb(73, 65, 56);
 }
 .panel {
-    margin-bottom: 20px;
-    background-color: rgb(24, 23, 22);
-    
+    margin-bottom: 20px;    
+    background-color: inherit;
     border: 1px solid transparent;
     border-radius: 1px;    
     
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);    
+    -webkit-box-shadow: 0 1132px 123px rgba(0, 0, 0, 0);
+            box-shadow: 0 1123px 123px rgba(0, 0, 0, 0);
+                
+    padding: 0px;  
+    padding-right: 60px;
+    padding-left: 20px;
   }
 
   
-.panel-info > .panel-heading { 
-    background-image:         linear-gradient(to bottom, #4d4432 0%, #423928 100%);
+.panel-heading { 
+    background-image:         linear-gradient(to bottom, #4d4432 0%, #3b3324 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffc4e3f3', GradientType=0);
     background-repeat: repeat-x;   
+
     background-color: rgb(24, 23, 22); 
     color: #bebebe;
     
-    border-color: rgb(59, 53, 45);
-
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-color: #3b3324;
     
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;   
   }
 
   .panel-body {
     padding: 15px;
     background-color:  rgb(44, 42, 40);
-    color: #bebebe;
-
-    
+    color: #bebebe; 
+        
     
   }
 
@@ -80,7 +80,7 @@ input[type="password"]{
       background-repeat: repeat-x;
       background-color: #625cb8;
       border-color: rgb(34, 33, 32);
-      color: #bebebe;    
+      color: #bebebe;          
     }
   .btn-success:hover {
       color: #beb5a2;

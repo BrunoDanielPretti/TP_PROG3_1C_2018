@@ -10,6 +10,7 @@
     <script src="./bower_components/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
     <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>  
     <link rel="stylesheet" href="./CSS/estilos.css">
+    <link rel="stylesheet" href="./CSS/estilos2.css">
     <script src="js/script.js"></script>   
     <title>Restaurante</title>
 </head>
@@ -29,7 +30,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="nav-1">
                         <ul class="nav navbar-nav navbar-left">           
-                            <li><a href="#" onclick="Nexo('Mesas')" class="navbar-brand" id="">Administrar 1</a></li>                            
+                            <li><a href="#" onclick="Nexo('Mesas', HTML_Mesas_Todas)" class="navbar-brand" id="">Administrar 1</a></li>                            
                         </ul>    
                         <ul class="nav navbar-nav navbar-left">                                                                                         
                             <li><a href="#" onclick="" class="navbar-brand" id="">Administrar 2</a></li>
@@ -41,10 +42,44 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-    
-            <div class="container" id="principal">
-                <h1>Ola q ase, osea... ola q ase</h1>
+            
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Mesas_Todas')">Todas</button>
+                <button class="tablinks" onclick="openCity(event, 'Mesas_EnPreparacion')">En Preparacion</button>
+                <button class="tablinks" onclick="openCity(event, 'Mesas_Comiendo')">Comiendo</button>
+                <button class="tablinks" onclick="openCity(event, 'Mesas_Cerradas')">Cerradas</button>
+
             </div>
+            
+            <!-- Tab content -->
+            <div id="Mesas_Todas" class="tabcontent">
+                <div class="container" id="HTML_Mesas_Todas">
+
+                </div>
+            </div>
+            
+            <div id="Mesas_EnPreparacion" class="tabcontent">
+                <h3>Mesas_EnPreparacion</h3>
+                <p>Paris is the capital of France.</p>
+            </div>
+            
+            <div id="Mesas_Comiendo" class="tabcontent">
+                <h3>Mesas_Comiendo</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div> 
+
+            <div id="Mesas_Cerradas" class="tabcontent">
+                <h3>Mesas_Cerradas</h3>
+                <p>Tokyo is the capital of Japan.</p>
+            </div> 
+
+            <div class="container " id="principal">                    
+                
+            </div>
+
+            
+
+            
        
 </body>
 </html>

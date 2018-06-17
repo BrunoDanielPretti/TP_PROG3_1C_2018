@@ -25,18 +25,41 @@
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Mesa");                
         }
 
+        public function EstadoToString($pEstado){
+            switch ($pEstado) {
+                case '0':
+                    return "Cerrada";
+                    break;
+                case '1':
+                    return "Esperando Pedido";
+                    break;
+                case '2':
+                    return "Con Clientes Comiendo";
+                    break;
+                case '3':
+                    return "Con Clientes Pagando";
+                    break;
+                case '4':
+                    return "Caso 4";
+                    break;
+                
+                default:                    
+                    break;
+            }
+        }
+
 
         function MesasHTML($pMesas){
            
             $string = "";
             foreach ($pMesas as $key) {
-
+               $estado = Mesa::EstadoToString($key->estado) ;
                $string = $string.
                <<<E01
-            <div class="panel panel-info col-xs-12 col-md-6">
+            <div class="panel col-xs-12 col-sm-6 col-md-4">
                 <div class="panel-heading">Mesa:   <spam class='btn btn-success'>$key->id</spam></div>
                 <div class="panel-body" id="menuBotones">                                  
-                    <spam>Estado: $key->estado</spam><br>                    
+                    <spam>Estado: $estado</spam><br>                    
                     <spam>Pedido: $key->pedido</spam>
                 </div>
             </div>
