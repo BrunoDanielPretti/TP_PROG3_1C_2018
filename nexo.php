@@ -95,8 +95,9 @@
     $app->get('/Mesas[/]', function(Request $request, Response $response){                
         $resultado = Mesa::TraerTodasLasMesas();              
         if($resultado != false){
-            echo Mesa::MesasHTML($resultado);
-            //echo json_encode($resultado);            
+            $HTMLMesas = Mesa::MesasHTML($resultado);
+            return json_encode($HTMLMesas);            
+            //return $HTMLMesas;
         }else{
             echo "ERROR";
         }

@@ -50,6 +50,38 @@
 
 
         function MesasHTML($pMesas){
+            $cont = 0;
+            $string = array();
+            foreach ($pMesas as $key) {
+                $estado = Mesa::EstadoToString($key->estado) ;
+                $string[$cont]['string'] =
+               <<<E01
+            <div class="panel col-xs-12 col-sm-6 col-md-4">
+                <div class="panel-heading">Mesa:   <spam class='btn btn-success'>$key->id</spam></div>
+                <div class="panel-body" id="menuBotones">                                  
+                    <spam>Estado: $estado</spam><br>                    
+                    <spam>Pedido: $key->pedido</spam>
+                </div>
+            </div>
+E01;
+            $string[$cont]['estado'] = $key->estado;
+                $cont++;
+            }
+            return $string;
+           
+        }
+
+
+
+
+
+
+
+
+    } //---------- FIN CLASE MESA -----------//
+
+/*
+       function MesasHTML($pMesas){
            
             $string = "";
             foreach ($pMesas as $key) {
@@ -68,16 +100,7 @@ E01;
             return $string;
            
         }
-
-
-
-
-
-
-
-
-    }
-
-
+*/
 
 ?>
+

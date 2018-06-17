@@ -70,6 +70,38 @@
         //$("#txtClave").attr("placeholder", "admin");        
     }
 
+    function NexoMesa(){        
+        $.ajax({
+            url: "Mesas",
+            type: "GET"
+        }).done(function(datos){
+            datos = JSON.parse(datos);
+            tablaTodos = ""; tablaPreparacion=""; tablaCerradas=""; tablaComiendo="";
+            //TablaPreparacion = "";
+
+            for (let index = 0; index < datos.length; index++) {
+                tablaTodos = tablaTodos+datos[index]['string'];
+                
+                switch (datos[index]['estado']) {
+                    case 0:
+                    tablaCerradas = tablaCerradas+datos[index]['string'];
+                        break;    
+                    case 1:
+                        tablaPreparacion = tablaPreparacion+datos[index]['string'];
+                        break; 
+                    case 2:
+                        tablaComiendo    = tablaComiendo+datos[index]['string'];
+                        break;
+                }
+                            
+            }
+            $("#HTML_Mesas_Todas").html(tablaTodos);
+            $("#HTML_Mesas_EnPreparacion").html(tablaPreparacion);
+            $("#HTML_Mesas_Cerradas").html(tablaCerradas);
+            $("#HTML_Mesas_Comiendo").html(tablaComiendo);
+        })    
+    }
+
 }
 
 {//-------------------------------------------------------------------//
