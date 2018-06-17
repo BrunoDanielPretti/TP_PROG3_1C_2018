@@ -16,7 +16,7 @@ EO1;
         elseif($pTipo == 'a')
         {return <<<EO2
             <ul class="nav navbar-nav">
-                <li><a href="#" onclick="entrada()">Entrada</a></li>
+                <li><a href="#" onclick="Nexo('Mesas')">Mesas</a></li>
                 <li><a href="#" onclick="salida()">Salida</a></li>  
                 <li><a href="#" onclick="administrar()">Administrar</a></li>                                              
             </ul>

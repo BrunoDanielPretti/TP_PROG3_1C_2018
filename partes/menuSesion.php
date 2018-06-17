@@ -31,7 +31,7 @@
             <div class="col-md-offset-2">   
                 <div class="form-group">
                     <button class="btn btn-success" onclick="sesionAceptar('empleado')" >Aceptar</button>
-                    <button class="btn btn-success" onclick="sesionAceptar('admin')" >Admin</button>
+                    <button class="btn btn-success" onclick="btnAdmin()" >Admin</button>
                     <button class="btn btn-success" onclick="sesionAceptar('cerrar')">Cancelar</button>
                 </div>
             </div>        

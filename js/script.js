@@ -61,3 +61,13 @@
         Nexo(miParam);
     }
 }
+
+{//---------------------- DEBUG --------------------------------------//
+    function btnAdmin(){        
+        $("#txtUsuario").attr("value", "admin");
+        $("#txtClave").attr("value", "admin");
+        //$("#txtUsuario").attr("placeholder", "admin");
+        //$("#txtClave").attr("placeholder", "admin");        
+    }
+
+}

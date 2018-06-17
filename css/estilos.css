@@ -23,31 +23,35 @@ input[type="password"]{
 .panel {
     margin-bottom: 20px;
     background-color: rgb(24, 23, 22);
+    
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: 1px;    
     
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-   
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);    
   }
 
   
-.panel-info > .panel-heading {
-    background-image: -webkit-linear-gradient(top, #cf3434 0%, #e0ce26 100%);
-    background-image:      -o-linear-gradient(top, #1a92d3 0%, #25cf3c 100%);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#fd0404), to(#ec0d0d));
+.panel-info > .panel-heading { 
     background-image:         linear-gradient(to bottom, #4d4432 0%, #423928 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffc4e3f3', GradientType=0);
     background-repeat: repeat-x;   
     background-color: rgb(24, 23, 22); 
     color: #bebebe;
+    
     border-color: rgb(59, 53, 45);
+
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    
   }
 
   .panel-body {
     padding: 15px;
     background-color:  rgb(44, 42, 40);
     color: #bebebe;
+
+    
     
   }
 

@@ -7,6 +7,7 @@
     require 'php/clases/AutentificadorJWT.php';
     require 'php/clases/AccesoDatos.php';
     require 'php/clases/Usuario.php';
+    require 'php/clases/Mesa.php';
     require 'partes/Manejo_Nav_Menu.php';
 
     //\slim\Slim::registerAutoloader();
@@ -90,6 +91,17 @@
             //return $e->getMessage();
         }                        
     });
+
+    $app->get('/Mesas[/]', function(Request $request, Response $response){                
+        $resultado = Mesa::TraerTodasLasMesas();              
+        if($resultado != false){
+            echo Mesa::MesasHTML($resultado);
+            //echo json_encode($resultado);            
+        }else{
+            echo "ERROR";
+        }
+    });
+
 
 //---------------------------------------------------------------------------------
 $app->run();
