@@ -60,16 +60,16 @@
 
 //---------------------------------  USUARIO --------------------------------------------------//
 
-    $app->post('/php/iniciarUsuario', function(Request $request, Response $response){        
+    $app->post('/php/iniciarUsuario', function(Request $request, Response $response){
         $ArrayDeParametros = $request->getParsedBody();
         $usuario = $ArrayDeParametros['usuario'];
-        $clave   = $ArrayDeParametros['clave'];    
+        $clave   = $ArrayDeParametros['clave'];
 
-        $resultado = Usuario::BuscarPorSesion($usuario, $clave);      
+        $resultado = Usuario::BuscarPorSesion($usuario, $clave);
         
-        if($resultado != false){        
+        if($resultado != false){
             $datos= array('usuario' => $usuario, 'clave' => $clave, 'tipo' => $resultado);
-            $token = AutentificadorJWT::CrearToken($datos);  
+            $token = AutentificadorJWT::CrearToken($datos);
 
             $navMenu = MANEJO_NAV_MENU($resultado, $usuario);
             
@@ -77,7 +77,7 @@
             echo json_encode($envio);
         }else{
             echo "error";
-        }            
+        }
     });
 //---------------------------------  PRUEBAS --------------------------------------------------//
     $app->get('/Prueba/{pToken}', function (Request $request, Response $response, $args) {        

@@ -12,7 +12,11 @@
     }
 
     function NexoP(param, destino="#principal"){
+        $("#TabZone-1").html("");
+        $("#TabZone-2").html("");
+        $("#principal").html("");
         Nexo("partes/"+param, destino);
+        
     }
 }
 {   //------------------------- SESION ------------------//
@@ -70,7 +74,8 @@
         //$("#txtClave").attr("placeholder", "admin");        
     }
 
-    function NexoMesa(){        
+    function NexoMesa(){
+        NexoP("Mesas_Tab", "#TabZone-1");        
         $.ajax({
             url: "Mesas",
             type: "GET"
@@ -99,6 +104,8 @@
             $("#HTML_Mesas_EnPreparacion").html(tablaPreparacion);
             $("#HTML_Mesas_Cerradas").html(tablaCerradas);
             $("#HTML_Mesas_Comiendo").html(tablaComiendo);
+
+            openCity(event, 'Mesas_Todas');
         })    
     }
 

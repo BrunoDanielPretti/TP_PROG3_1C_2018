@@ -1,5 +1,5 @@
 <div class=" col-sm-offset-3 col-sm-6">
-<div class="panel panel-info"> 
+<div class="panel"> 
 <div class="panel-heading">Usuario</div>
     <div class="panel-body">
         <form class="form-horizontal col-xs-12 col-md-offset-2 col-md-8 ">

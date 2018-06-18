@@ -1,7 +1,7 @@
 <?php
     function MANEJO_NAV_MENU($pTipo, $pUsuario){    
         //$pUsuario = $_POST["usuario"];
-        if($pTipo == "e")
+        if($pTipo == 2)
         {return 
 <<<EO1
             <ul class="nav navbar-nav">
@@ -13,7 +13,7 @@
             </ul>
 EO1;
         }
-        elseif($pTipo == 'a')
+        elseif($pTipo == 1)
         {return <<<EO2
             <ul class="nav navbar-nav">
                 <li><a href="#" onclick="Nexo('Mesas')">Mesas</a></li>
@@ -21,7 +21,7 @@ EO1;
                 <li><a href="#" onclick="administrar()">Administrar</a></li>                                              
             </ul>
             <ul class="nav navbar-nav navbar-right">                
-                <li><a href="#" onclick="NexoP('menuAdmin')" class="navbar-brand" id="">$pUsuario</a></li>
+                <li><a href="#" onclick="NexoP('menuAdmin')" class="navbar-brand" id="">$pUsuario asd</a></li>
             </ul>
 EO2;
        }
