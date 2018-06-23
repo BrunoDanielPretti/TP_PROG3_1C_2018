@@ -15,8 +15,7 @@
         $("#TabZone-1").html("");
         $("#TabZone-2").html("");
         $("#principal").html("");
-        Nexo("partes/"+param, destino);
-        
+        Nexo("partes/"+param, destino);        
     }
 }
 {   //------------------------- SESION ------------------//
@@ -50,7 +49,7 @@
             }
             else{
                 datos = JSON.parse(datos);
-                localStorage.setItem("token", datos['token']);
+                localStorage.setItem("TokenRestauranteChinchilla", datos['token']);
                 $("#nav-1").html(datos['nav']);
                 //Refresh_Nav();                
             }        
@@ -59,7 +58,7 @@
 
     function Prueba(){
         var miParam = "Prueba/";
-        miParam += localStorage.getItem("token");
+        miParam += localStorage.getItem("TokenRestauranteChinchilla");
         
         
         Nexo(miParam);
@@ -133,3 +132,5 @@
         evt.currentTarget.className += " active";
     } 
 }
+
+

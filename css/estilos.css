@@ -61,9 +61,22 @@ input[type="password"]{
     font-size: 16px;
     color: red;
   }
-
+/*---------------------- Navbar  ----------------------------------*/
 .navbar-inverse{
   background-color:  rgb(44, 42, 40);
+}
+.navbar-inverse .navbar-collapse .navbar-brand,
+.navbar-inverse .navbar-brand{
+  color: #bebebe;
+  transition: 0.3s;
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+}
+.navbar-inverse .navbar-collapse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:hover{
+  background-color: #8d78559d;
+  color: #beb5a2;
 }
 /*--------------------------------------------------------*/
 .m8 {

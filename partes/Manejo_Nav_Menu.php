@@ -1,5 +1,5 @@
 <?php
-    function MANEJO_NAV_MENU($pTipo, $pUsuario){    
+    function MANEJO_NAV_MENU($pTipo, $pUsuario=NULL){    
         //$pUsuario = $_POST["usuario"];
         if($pTipo == 2)
         {return 
@@ -21,7 +21,7 @@ EO1;
                 <li><a href="#" onclick="administrar()">Administrar</a></li>                                              
             </ul>
             <ul class="nav navbar-nav navbar-right">                
-                <li><a href="#" onclick="NexoP('menuAdmin')" class="navbar-brand" id="">$pUsuario asd</a></li>
+                <li><a href="#" onclick="NexoP('menuAdmin')" class="navbar-brand" id="">$pUsuario</a></li>
             </ul>
 EO2;
        }
