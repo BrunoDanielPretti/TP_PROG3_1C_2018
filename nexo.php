@@ -57,6 +57,11 @@
         //var_dump($decod);
     });
 
+    $app->get('/PruebaToken', function (Request $request, Response $response) {        
+        $miToken = $request->getHeader();
+        echo json_encode($miToken);
+    });
+
 
 //---------------------------------  USUARIO --------------------------------------------------//
 
