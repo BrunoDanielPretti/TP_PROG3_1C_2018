@@ -12,10 +12,14 @@
     }
 
     function NexoP(param, destino="#principal"){
+        Zonas_Refresh();
+        Nexo("partes/"+param, destino);        
+    }
+
+    function Zonas_Refresh(){
         $("#TabZone-1").html("");
         $("#TabZone-2").html("");
         $("#principal").html("");
-        Nexo("partes/"+param, destino);        
     }
 }
 {   //------------------------- SESION ------------------//
@@ -72,7 +76,40 @@
         //$("#txtUsuario").attr("placeholder", "admin");
         //$("#txtClave").attr("placeholder", "admin");        
     }
+    
+    function NexoProductos(){
+        
+        $.ajax({
+            url: "nexo.php/Productos",
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            datos = JSON.parse(datos);                         
+            //alert(datos["productos"]);
+            
+            var StringTabla = "";            
+                     
+            for (let index = 0; index < datos['productos'].length; index++){
+                StringTabla = StringTabla+datos['productos'][index];
+            }
+            Zonas_Refresh();
+            $("#principal").html(datos['tabla']);            
+            Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
+            $("#Tabla_Body").html(StringTabla);                        
+        })    
+    }
 
+    function Tabla_ArmarHead(pArray){
+        var string = "";
+        pArray.forEach(element => {
+            string = string+"<th>"+element+"</th>";
+        });        
+        $("#Tabla_Head").html(string);
+    }
+}
+
+
+{//------------------------  MESAS  ---------------------------------//
     function NexoMesa(){
         NexoP("Mesas_Tab", "#TabZone-1");        
         $.ajax({
@@ -108,26 +145,16 @@
         })    
     }
 
-    function NexoProductos(){
-        
-        $.ajax({
-            url: "nexo.php/Productos",
-            type: "GET",
-            dataType: "text"
-        }).done(function(datos){
-            datos = JSON.parse(datos);                         
-            //alert(datos["productos"]);
-            
-            var StringTabla = "";            
-                     
-            for (let index = 0; index < datos['productos'].length; index++){
-                StringTabla = StringTabla+datos['productos'][index];
-            }
-            
-            $("#principal").html(datos['tabla']);
-            $("#Tabla_Body").html(StringTabla);            
-            //$("#principal").html(VarProductos[0]);
-        })    
+    function Tarjeta_Show(pParam){
+        var target = $("[target='"+pParam+"']");
+        if(target.attr("style") == "display: none;"){
+            $(".panel-footer").hide();                        
+            //target.show();            
+            target.slideDown("fast");            
+        }else{
+            //target.hide();            
+            target.slideUp("fast");
+        }                            
     }
 }
 

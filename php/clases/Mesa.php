@@ -56,11 +56,15 @@
                 $estado = $key->EstadoToString() ;
                 $string[$cont]['string'] =
                <<<E01
-            <div class="panel tarjeta col-xs-12 col-sm-6 col-md-4" onclick="alert('$key->id')">
+            <div class="panel tarjeta col-xs-12 col-sm-6 col-md-4" onclick="Tarjeta_Show('$key->id')">
                 <div class="panel-heading">Mesa:   <spam>$key->id</spam></div>
-                <div class="panel-body" id="menuBotones">                                  
+                <div class="panel-body" id="">                                  
                     <spam>Estado: $estado</spam><br>                    
                     <spam>Pedido: $key->pedido</spam>
+                </div>
+                <div class="panel-footer" target="$key->id" style="display: none;">                                  
+                    Ola q ase<br>
+                    <spam class="btn btn-success">Boton</spam><br><br><br>
                 </div>
             </div>
 E01;

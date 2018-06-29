@@ -53,7 +53,7 @@ input[type="password"]{
     font-size: 16px;
     color: red;
   }
-
+/*---------------------------  Tarjeta --------------------------*/
   .tarjeta{
     margin-bottom: 20px;        
     padding: 0px;  
@@ -76,6 +76,15 @@ input[type="password"]{
   }
   .tarjeta .panel-body{
     padding: 15px;           
+  }
+  .tarjeta .panel-footer{
+    background-color:  rgb(44, 42, 40);
+    border-color: #382f1f;
+  }
+  .tarjeta:hover .panel-footer{
+    background: rgb(53, 50, 48);
+    border-color: #463a27;
+    color: #c7c6c6; 
   }
   .tarjeta spam{    
     float: right;
@@ -159,10 +168,10 @@ input[type="password"]{
   border-width: 1px;  
   transition: 0.15s;
 }
+
 .td-br:hover .btn-icon{
   border-color: #c4a337;
 }
-
 .td-br{  
   border-width: 1px; 
   border-right-style: solid;
@@ -174,7 +183,7 @@ input[type="password"]{
   cursor: pointer;
   transition: 0.15s;
   color: #c9c6c6;
-  
+  background-color:  rgb(44, 42, 40);  
 }
 
 .table{    
@@ -193,17 +202,21 @@ th{
   border-color: rgb(73, 65, 56);
 }
 tbody{
-  border-color: red;
+  
+  border: 2px solid rgb(73, 65, 56);
 }
 td{  
-  border-bottom-style: solid;
-  
+  border-bottom-style: solid;  
   border-width: 1px;
   border-color: rgb(73, 65, 56);
+  border-right: 1px solid rgb(39, 36, 35);
+}
+.td-br:hover td{
+  border-right: 1px solid rgb(54, 50, 49);
 }
 .table > thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid rgb(73, 65, 56);
+  border: 2px solid rgb(73, 65, 56);
 }
 
 
