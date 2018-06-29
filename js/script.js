@@ -108,6 +108,18 @@
         })    
     }
 
+    function NexoProductos(param, destino="#principal", metodo="GET"){
+        
+        $.ajax({
+            url: "nexo.php/Productos",
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            datos = JSON.parse(datos);  
+            var asd = "<img src='resources/IconsL2/"+datos[0]['foto']+ ".jpg'>";
+            $("#principal").html(asd);
+        })    
+    }
 }
 
 {//-------------------------------------------------------------------//

@@ -8,6 +8,7 @@
     require 'php/clases/AccesoDatos.php';
     require 'php/clases/Usuario.php';
     require 'php/clases/Mesa.php';
+    require 'php/clases/Producto.php';
     require 'partes/Manejo_Nav_Menu.php';
 
     //\slim\Slim::registerAutoloader();
@@ -130,6 +131,11 @@
         }else{
             echo "ERROR";
         }
+    });
+
+    $app->get('/Productos[/]', function(Request $request, Response $response){                
+        $resultado = Producto::TraerTodosLosProductos();              
+        return json_encode($resultado);
     });
 
 

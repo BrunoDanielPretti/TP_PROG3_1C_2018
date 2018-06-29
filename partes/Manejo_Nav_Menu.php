@@ -47,11 +47,15 @@ EO2;
                         </ul>    
                         <ul class="nav navbar-nav navbar-left">                                                                                         
                             <li><a href="#" onclick="NexoP('TablaUsuarios')" class="navbar-brand" id="">Personal</a></li>
-                        </ul>                                                           
+                        </ul>
+                        <ul class="nav navbar-nav navbar-left">           
+                            <li><a href="#" onclick="NexoProductos()" class="navbar-brand" id="">Productos</a></li>                            
+                        </ul>                                                            
                         <ul class="nav navbar-nav navbar-right">
                             <!--<li role="presentation" class="btn btn-danger btn-lg" onclick="btnSesion()" >Iniciar Sesion</li>                    -->
                             <li><a href="#" onclick="NexoP('menuSesion')" class="navbar-brand" id="">Usuario</a></li>
                         </ul>
+                        
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>

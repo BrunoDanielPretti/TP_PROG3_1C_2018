@@ -69,6 +69,10 @@ input[type="password"]{
   .tarjeta .panel-body{
     padding: 15px;    
   }
+  .tarjeta .btn-success{
+    margin-top: -6px;
+    float: right;
+  }
 /*---------------------- Navbar  ----------------------------------*/
 .navbar-inverse{
   background-color:  rgb(44, 42, 40);
