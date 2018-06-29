@@ -25,8 +25,8 @@
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Mesa");                
         }
 
-        public function EstadoToString($pEstado){
-            switch ($pEstado) {
+        public function EstadoToString(){
+            switch ($this->estado) {
                 case '0':
                     return "Cerrada";
                     break;
@@ -53,10 +53,10 @@
             $cont = 0;
             $string = array();
             foreach ($pMesas as $key) {
-                $estado = Mesa::EstadoToString($key->estado) ;
+                $estado = $key->EstadoToString() ;
                 $string[$cont]['string'] =
                <<<E01
-            <div class="panel col-xs-12 col-sm-6 col-md-4">
+            <div class="panel tarjeta col-xs-12 col-sm-6 col-md-4">
                 <div class="panel-heading">Mesa:   <spam class='btn btn-success'>$key->id</spam></div>
                 <div class="panel-body" id="menuBotones">                                  
                     <spam>Estado: $estado</spam><br>                    

@@ -19,17 +19,12 @@ input[type="password"]{
     border-color: rgb(73, 65, 56);
 }
 .panel {    
-    margin-bottom: 20px;    
     background-color: inherit;
     border: 1px solid transparent;
     border-radius: 1px;    
     
     -webkit-box-shadow: 0 1132px 123px rgba(0, 0, 0, 0);
             box-shadow: 0 1123px 123px rgba(0, 0, 0, 0);
-                
-    padding: 0px;  
-    padding-right: 60px;
-    padding-left: 20px;
   }
 
   
@@ -48,7 +43,7 @@ input[type="password"]{
   }
 
   .panel-body {
-    padding: 15px;
+    
     background-color:  rgb(44, 42, 40);
     color: #bebebe; 
         
@@ -60,6 +55,19 @@ input[type="password"]{
     margin-bottom: 0;
     font-size: 16px;
     color: red;
+  }
+
+  .tarjeta{
+    margin-bottom: 20px;        
+    padding: 0px;  
+    padding-right: 60px;
+    padding-left: 20px;
+  }
+  .tarjeta .panel-heading{
+    
+  }
+  .tarjeta .panel-body{
+    padding: 15px;    
   }
 /*---------------------- Navbar  ----------------------------------*/
 .navbar-inverse{
