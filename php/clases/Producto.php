@@ -34,11 +34,31 @@
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Producto");                
         }
 
+        public function ProductosHTML($pProductos){
+            $cont = 0;
+            $string = array();
+            foreach ($pProductos as $key) {
+                $string[$cont] =
+                <<<E01
+                    <tr>
+                        <td><img class='btn btn-success' src='resources/IconsL2/$key->foto.jpg'></td>
+                        <td>$key->nombre</td>
+                        <td>$key->precioCompra</td>
+                        <td>$key->precioVenta</td>
+                        <td>$key->tipo</td>
+                    </tr>
+E01;
+                $cont++;
+            }
+            return $string;
+        }
+
 
 
 
 
     }//------- FIN CLASE PRODUCTO
+    //<td><img src='resources/IconsL2/$key->foto.jpg></td>
 
     
 

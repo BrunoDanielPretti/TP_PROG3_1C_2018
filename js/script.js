@@ -108,16 +108,25 @@
         })    
     }
 
-    function NexoProductos(param, destino="#principal", metodo="GET"){
+    function NexoProductos(){
         
         $.ajax({
             url: "nexo.php/Productos",
             type: "GET",
             dataType: "text"
         }).done(function(datos){
-            datos = JSON.parse(datos);  
-            var asd = "<img src='resources/IconsL2/"+datos[0]['foto']+ ".jpg'>";
-            $("#principal").html(asd);
+            datos = JSON.parse(datos);                         
+            //alert(datos["productos"]);
+            
+            var StringTabla = "";            
+                     
+            for (let index = 0; index < datos['productos'].length; index++){
+                StringTabla = StringTabla+datos['productos'][index];
+            }
+            
+            $("#principal").html(datos['tabla']);
+            $("#Tabla_Body").html(StringTabla);            
+            //$("#principal").html(VarProductos[0]);
         })    
     }
 }
