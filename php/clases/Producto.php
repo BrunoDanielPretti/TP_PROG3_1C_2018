@@ -40,8 +40,8 @@
             foreach ($pProductos as $key) {
                 $string[$cont] =
                 <<<E01
-                    <tr>
-                        <td><img class='btn btn-success' src='resources/IconsL2/$key->foto.jpg'></td>
+                    <tr class='td-br' onclick="alert('$key->nombre')">
+                        <td><img class='btn-icon' src='resources/IconsL2/$key->foto.jpg'></td>
                         <td>$key->nombre</td>
                         <td>$key->precioCompra</td>
                         <td>$key->precioVenta</td>

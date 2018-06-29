@@ -42,12 +42,9 @@ input[type="password"]{
     border-top-right-radius: 3px;   
   }
 
-  .panel-body {
-    
+  .panel-body {    
     background-color:  rgb(44, 42, 40);
-    color: #bebebe; 
-        
-    
+    color: #bebebe;             
   }
 
   .panel-title {
@@ -62,15 +59,25 @@ input[type="password"]{
     padding: 0px;  
     padding-right: 60px;
     padding-left: 20px;
-  }
-  .tarjeta .panel-heading{
     
   }
-  .tarjeta .panel-body{
-    padding: 15px;    
+  
+  .tarjeta:hover{
+    cursor: pointer;      
   }
-  .tarjeta .btn-success{
-    margin-top: -6px;
+  .tarjeta:hover .panel-heading{
+    background-image: linear-gradient(to bottom, #8d78559d 0%, #4d3f27b7 100%);
+    color: #c4a337; 
+    border-color: #382f1f;            
+  }
+  .tarjeta:hover .panel-body{
+    background: rgb(53, 50, 48);
+    color: #c7c6c6; 
+  }
+  .tarjeta .panel-body{
+    padding: 15px;           
+  }
+  .tarjeta spam{    
     float: right;
   }
 /*---------------------- Navbar  ----------------------------------*/
@@ -146,7 +153,61 @@ input[type="password"]{
   }
 
 /*------------------------------------------------------*/
+.btn-icon{  
+  border-color: #534b31;
+  border-style: solid;
+  border-width: 1px;  
+  transition: 0.15s;
+}
+.td-br:hover .btn-icon{
+  border-color: #c4a337;
+}
 
+.td-br{  
+  border-width: 1px; 
+  border-right-style: solid;
+  border-left-style: solid; 
+  border-color: rgb(73, 65, 56);      
+}
+.td-br:hover{
+  background: #8d78559d;
+  cursor: pointer;
+  transition: 0.15s;
+  color: #c9c6c6;
+  
+}
+
+.table{    
+  color: #bebebe;    
+  background-color:  rgb(31, 29, 28);      
+}
+thead{
+  border-top-style: solid;
+  border-color: rgb(73, 65, 56);  
+  background-color:  rgb(44, 42, 40);
+  color: #cac8c8;  
+}
+th{
+  border-style: solid; 
+  border-width: 1px;
+  border-color: rgb(73, 65, 56);
+}
+tbody{
+  border-color: red;
+}
+td{  
+  border-bottom-style: solid;
+  
+  border-width: 1px;
+  border-color: rgb(73, 65, 56);
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid rgb(73, 65, 56);
+}
+
+
+/*---------------------------------------------------*/
 #principal{  
   color: #e6e6e6;
 }
