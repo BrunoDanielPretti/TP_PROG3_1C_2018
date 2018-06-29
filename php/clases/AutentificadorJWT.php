@@ -41,8 +41,11 @@
             }
             catch(\exeption $e){
                 throw new Exception("Error Processing Request", 404);
-            }
-                                                
+            }                                                
+        }
+
+        public static function olaqase(){
+            return "ola q ase";
         }
     }
 

@@ -1,23 +1,55 @@
 window.onload = function(){    
-    NexoP("navbar", "#NavbarZone");
-
+ 
     var miToken = localStorage.getItem("TokenRestauranteChinchilla");
 
-    if(miToken != null){
-                
+    if(miToken != null){                
+        Token_EnviarParaNavMenu();
     }else{
-        alert("No existe el token");
+        $("#principal").html("No existe el token")
+        NexoP("navbar", "#NavbarZone");
     }
 
-    PruebaToken();    
+    //PruebaToken();    
 }
 
-function PruebaToken(){    
-        $.ajax({
-            url: "nexo.php/PruebaToken",
-            type: "GET",
-            headers: localStorage.getItem("TokenRestauranteChinchilla")
-        }).done(function(datos){
-            $("#principal").html(datos);
-        })    
+
+
+function Token_EnviarParaNavMenu(){
+    var miToken = localStorage.getItem("TokenRestauranteChinchilla");
+    $.ajax({
+        url: "nexo.php/ValidarToken",
+        type: "GET",
+        headers: {"token" :miToken}
+    }).done(function(datos){
+        datos = JSON.parse(datos);
+        if(datos['error'] == "Expiro"){              
+            $("#NavbarZone").html(datos['base'])           
+            //$("#principal").html(datos['error']);
+            $("#principal").html("Expiro el Token");
+        }else{           
+            $("#NavbarZone").html(datos['base'])                    
+            $("#nav-1").html(datos['contenido']);
+            
+        }
+        
+    })    
+}
+
+
+
+
+
+
+
+
+//-----------------------------------------------
+function PruebaToken(){
+    var miToken = localStorage.getItem("TokenRestauranteChinchilla");
+    $.ajax({
+        url: "nexo.php/ValidarToken",
+        type: "GET",
+        headers: {"token" :miToken}
+    }).done(function(datos){
+        $("#principal").html(datos);
+    })    
 }

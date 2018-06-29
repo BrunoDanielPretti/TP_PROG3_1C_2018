@@ -39,7 +39,7 @@
         echo $token;
     });
 
-    $app->get('/ValidarToken', function (Request $request, Response $response) {        
+    $app->get('/ValidarTokenPRUEBA', function (Request $request, Response $response) {        
         //$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJJQVQiOjE0OTc1Nzk2OTcsIkVYUCI6MTQ5NzU3OTc1NywiREFUQSI6eyJqdWFuIjoicm9nZWxpbyIsImFwZWxsaWRvIjoicGVyZXMiLCJlZGFkIjozM30sIkFQUCI6ImFwaXJlc3QgSldUIn0.qZ4qjHJKHouScHhUDyt_uS7KX7aJSS2HszW2smM8nfY";
         $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJJQVQiOjE1Mjg3NTc4ODIsIkVYUCI6MTUyODc1Nzk0MiwiREFUQSI6eyJqdWFuIjoicm9nZWxpbyIsImFwZWxsaWRvIjoicGVyZXMiLCJlZGFkIjozM30sIkFQUCI6ImFwaXJlc3QgSldUIn0.yLkJg9o63n8OjA1jJEI_rwUba0Mr0mrRTlKzwcNBWiw";
         try{
@@ -57,9 +57,33 @@
         //var_dump($decod);
     });
 
+    $app->get('/ValidarToken', function (Request $request, Response $response) {        
+        $miToken = $request->getHeader("token");
+        $miToken = $miToken[0];
+        $BaseDelNavMenu   = MANEJO_NAV_MENU("cerrar");
+        //$variableDeCoso = include("partes/navbar.php");
+        try{
+            AutentificadorJWT::VirificarToken($miToken);
+            
+            $Decodigicado = AutentificadorJWT::DecodificarToken($miToken);
+            $BaseDelNavMenu   = MANEJO_NAV_MENU("cerrar");
+            $ContenidoDelMenu = MANEJO_NAV_MENU($Decodigicado->DATA->tipo, $Decodigicado->DATA->usuario);
+            
+            $envio = array('base'=>$BaseDelNavMenu, 'contenido'=>$ContenidoDelMenu);
+            echo json_encode($envio);
+        }
+        catch(Exception  $e){
+            $envio = array('base'=>$BaseDelNavMenu, "error"=>$e->getMessage() );
+            echo json_encode($envio);
+        }     
+    });
+    
     $app->get('/PruebaToken', function (Request $request, Response $response) {        
-        $miToken = $request->getHeader();
-        echo json_encode($miToken);
+        $miToken = $request->getHeader("token");
+        $Decodigicado = AutentificadorJWT::DecodificarToken($miToken[0]);
+        echo json_encode($Decodigicado);
+        echo "<br><br>IA: ".$Decodigicado->IAT;
+        echo "<br><br>Data: ".$Decodigicado->DATA->usuario;
     });
 
 
