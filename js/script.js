@@ -55,7 +55,8 @@
                 datos = JSON.parse(datos);
                 localStorage.setItem("TokenRestauranteChinchilla", datos['token']);
                 $("#nav-1").html(datos['nav']);
-                //Refresh_Nav();                
+                //Refresh_Nav();
+                Modal_Cerrar();                
             }        
         })
     }
@@ -105,6 +106,18 @@
             string = string+"<th>"+element+"</th>";
         });        
         $("#Tabla_Head").html(string);
+    }
+
+        
+    function Modal_Mostrar(){        
+        //$("#myModal").style.display = "block";
+        var modal = document.getElementById('myModal');
+        modal.style.display = "block";  
+    }
+
+    function Modal_Cerrar(){        
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
     }
 }
 
