@@ -12,7 +12,9 @@
     }
 
     function NexoP(param, destino="#principal"){
-        Zonas_Refresh();
+        if(destino != "#myModal"){
+            Zonas_Refresh();
+        }
         Nexo("partes/"+param, destino);        
     }
 
@@ -70,24 +72,9 @@
     }
 
     function btnSesion(){
-        //console.log("%cbtnSesion()", azul);
-        pagina = pNexo+"partes/menuSesion"; // "nexo.php/partes/menuSesion"
-        $.ajax({
-            url: pagina,
-            type: "GET",
-            dataType: "text"            
-        }).done(function(datos){
-            var destino = $("#BODY");
-            //console.log( $("#myModal") );
-            if( $("#myModal").html() == undefined){
-                destino.append(datos);               
-                console.log("%c btnSesion(): %cIngresa #myModal", azul, verde);                
-                Modal_Mostrar();
-            }else{                                     
-                console.log("%c btnSesion(): %cYa Existe #myModal", azul, gris);
-                Modal_Mostrar();
-            }            
-        })
+        console.log("%cbntSesion()", azul);
+        NexoP("menuSesion", "#myModal");
+        Modal_Mostrar();
     }
     
 }
@@ -220,7 +207,10 @@
         Nexo(miParam);
     }
    
-    
+    function borrarToken(){
+        console.log("%cToken Borrado", verde);
+        localStorage.setItem("TokenRestauranteChinchilla", undefined);
+    }
 
 
 

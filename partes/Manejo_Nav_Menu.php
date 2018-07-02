@@ -19,6 +19,7 @@ EO1;
                 <li><a href="#" onclick="Nexo('Mesas')">Mesas</a></li>
                 <li><a href="#" onclick="salida()">Salida</a></li>  
                 <li><a href="#" onclick="administrar()">Administrar</a></li>                                              
+                <li><a href="#" onclick="borrarToken()">Borrar Token</a></li>                                              
             </ul>
             <ul class="nav navbar-nav navbar-right">                
                 <li><a href="#" onclick="NexoP('menuAdmin')" class="navbar-brand" id="">$pUsuario</a></li>
