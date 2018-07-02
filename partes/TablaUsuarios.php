@@ -6,5 +6,5 @@
     </thead>
     <tbody id='Tabla_Body'>
         
-    </tbody>
+    </tbody>    
 </table>

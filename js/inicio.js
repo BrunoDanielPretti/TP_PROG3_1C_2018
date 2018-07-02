@@ -9,6 +9,7 @@ window.onload = function(){
         NexoP("navbar", "#NavbarZone");
     }
 
+    
     //PruebaToken();    
 }
 
@@ -34,6 +35,7 @@ function Token_EnviarParaNavMenu(){
         
     })    
 }
+
 
 
 

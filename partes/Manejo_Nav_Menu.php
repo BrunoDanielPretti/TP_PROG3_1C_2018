@@ -51,9 +51,8 @@ EO2;
                         <ul class="nav navbar-nav navbar-left">           
                             <li><a href="#" onclick="NexoProductos()" class="navbar-brand" id="">Productos</a></li>                            
                         </ul>                                                            
-                        <ul class="nav navbar-nav navbar-right">
-                            <!--<li role="presentation" class="btn btn-danger btn-lg" onclick="btnSesion()" >Iniciar Sesion</li>                    -->
-                            <li><a href="#" onclick="Modal_Mostrar()" class="navbar-brand" id="">Usuario</a></li>
+                        <ul class="nav navbar-nav navbar-right">                            
+                            <li><a href="#" onclick="btnSesion()" class="navbar-brand" id="">Usuario</a></li>
                         </ul>
                         
                     </div><!-- /.navbar-collapse -->

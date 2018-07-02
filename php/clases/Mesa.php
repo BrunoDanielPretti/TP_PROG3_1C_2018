@@ -51,9 +51,13 @@
 
         function MesasHTML($pMesas){
             $cont = 0;
+            $contRow = 0;
             $string = array();
             foreach ($pMesas as $key) {
                 $estado = $key->EstadoToString() ;
+                if($contRow == 0){
+                    $string[$cont]['string'] = "<div class='row'>";
+                }
                 $string[$cont]['string'] =
                <<<E01
             <div class="panel tarjeta col-xs-12 col-sm-6 col-md-4" onclick="Tarjeta_Show('$key->id')">
@@ -68,8 +72,16 @@
                 </div>
             </div>
 E01;
+            if($contRow == 2){
+                $string[$cont]['string'] = "</div>";
+            }
             $string[$cont]['estado'] = $key->estado;
-                $cont++;
+            $cont++;
+            if($contRow == 2){
+                $contRow = 0;
+            }else{
+                $contRow++;
+            }
             }
             return $string;
            

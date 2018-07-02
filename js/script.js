@@ -21,10 +21,18 @@
         $("#TabZone-2").html("");
         $("#principal").html("");
     }
+
+    function Modal_Mostrar(){               
+        $("#myModal").attr("style", "display: block");
+    }
+
+    function Modal_Cerrar(){           
+        $("#myModal").attr("style", "display: none");
+    }
+   
 }
 {   //------------------------- SESION ------------------//
-    function Refresh_Nav(){          //Ni puta idea de para q era esto
-        
+    function Refresh_Nav(){          //Ni puta idea de para q era esto        
         //$("#btnSesion").html("Sesion Iniciada");
         $.ajax({
             url: "partes/navMenus.php",
@@ -61,69 +69,32 @@
         })
     }
 
-    function Prueba(){
-        var miParam = "Prueba/";
-        miParam += localStorage.getItem("TokenRestauranteChinchilla");
-        
-        
-        Nexo(miParam);
-    }
-}
-
-{//---------------------- DEBUG --------------------------------------//
-    function btnAdmin(){        
-        $("#txtUsuario").attr("value", "admin");
-        $("#txtClave").attr("value", "admin");
-        //$("#txtUsuario").attr("placeholder", "admin");
-        //$("#txtClave").attr("placeholder", "admin");        
+    function btnSesion(){
+        //console.log("%cbtnSesion()", azul);
+        pagina = pNexo+"partes/menuSesion"; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"            
+        }).done(function(datos){
+            var destino = $("#BODY");
+            //console.log( $("#myModal") );
+            if( $("#myModal").html() == undefined){
+                destino.append(datos);               
+                console.log("%c btnSesion(): %cIngresa #myModal", azul, verde);                
+                Modal_Mostrar();
+            }else{                                     
+                console.log("%c btnSesion(): %cYa Existe #myModal", azul, gris);
+                Modal_Mostrar();
+            }            
+        })
     }
     
-    function NexoProductos(){
-        
-        $.ajax({
-            url: "nexo.php/Productos",
-            type: "GET",
-            dataType: "text"
-        }).done(function(datos){
-            datos = JSON.parse(datos);                         
-            //alert(datos["productos"]);
-            
-            var StringTabla = "";            
-                     
-            for (let index = 0; index < datos['productos'].length; index++){
-                StringTabla = StringTabla+datos['productos'][index];
-            }
-            Zonas_Refresh();
-            $("#principal").html(datos['tabla']);            
-            Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
-            $("#Tabla_Body").html(StringTabla);                        
-        })    
-    }
-
-    function Tabla_ArmarHead(pArray){
-        var string = "";
-        pArray.forEach(element => {
-            string = string+"<th>"+element+"</th>";
-        });        
-        $("#Tabla_Head").html(string);
-    }
-
-        
-    function Modal_Mostrar(){        
-        //$("#myModal").style.display = "block";
-        var modal = document.getElementById('myModal');
-        modal.style.display = "block";  
-    }
-
-    function Modal_Cerrar(){        
-        var modal = document.getElementById('myModal');
-        modal.style.display = "none";
-    }
 }
-
 
 {//------------------------  MESAS  ---------------------------------//
     function NexoMesa(){
+        console.log("%cNexoMesa()", azul);
         NexoP("Mesas_Tab", "#TabZone-1");        
         $.ajax({
             url: "Mesas",
@@ -171,7 +142,7 @@
     }
 }
 
-{//-------------------------------------------------------------------//
+{//-------------------------- coso de los paises-----------------------------------//
     function openCity(evt, cityName) {
         // Declare all variables
         var i, tabcontent, tablinks;
@@ -194,4 +165,78 @@
     } 
 }
 
+{//------------------------  PODUCTOS  ---------------------------------//
+    function NexoProductos(){
+        console.log("%cNexoProductios()", azul);        
+        $.ajax({
+            url: "nexo.php/Productos",
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            datos = JSON.parse(datos);                         
+            //alert(datos["productos"]);
+            
+            var StringTabla = "";            
+                     
+            for (let index = 0; index < datos['productos'].length; index++){
+                StringTabla = StringTabla+datos['productos'][index];
+            }
+            Zonas_Refresh();
+            $("#principal").html(datos['tabla']);            
+            Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
+            $("#Tabla_Body").html(StringTabla);
+            $("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar'>Agregar</button>");                        
+        })    
+    }
 
+    function Tabla_ArmarHead(pArray){
+        var string = "";
+        pArray.forEach(element => {
+            string = string+"<th>"+element+"</th>";
+        });        
+        $("#Tabla_Head").html(string);
+    }
+}
+
+{//---------------------- DEBUG --------------------------------------//
+    //---------------------------colores-----------------------
+    var verde = "color: greenyellow";
+    var rojo  = "color: #fc504a";
+    var azul  = "color: rgb(66, 199, 252)";
+    var gris  = "color: #cccccc";
+    // console.log("%c()", azul);
+    //---------------------------------------------------------
+    function btnAdmin(){
+        console.log("%cbtnAdmin()", azul);        
+        $("#txtUsuario").attr("value", "admin");
+        $("#txtClave").attr("value", "admin");
+        //$("#txtUsuario").attr("placeholder", "admin");
+        //$("#txtClave").attr("placeholder", "admin");        
+    }
+                    
+    function Prueba(){  // Para probar los Token, no me acuerdo q 
+        var miParam = "Prueba/";
+        miParam += localStorage.getItem("TokenRestauranteChinchilla");                
+        Nexo(miParam);
+    }
+   
+    
+
+
+
+    
+}
+
+
+$(document).ready(function(){
+
+    console.log("Inicio la pagina!!");
+
+    window.onclick = function(event) {
+        var modal = document.getElementById('myModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
+
+});
