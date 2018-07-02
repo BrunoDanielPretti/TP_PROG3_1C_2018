@@ -8,16 +8,22 @@ body {
 }
 
 
-input[type="text"]{
+input[type="text"], input[type="number"], input[type="password"], .form-group select{
     background-color: rgb(34, 33, 32);
     color: #bebebe;
     border-color: rgb(73, 65, 56);
 }
-input[type="password"]{
-    background-color: rgb(34, 33, 32);
-    color: #bebebe;
-    border-color: rgb(73, 65, 56);
+
+.input-group-addon{
+  background-image:         linear-gradient(to bottom, #4d4432 0%, #382f1f 100%);
+  color: #bebebe;
+  border-color: rgb(73, 65, 56);
+  
 }
+.form-group .control-label{
+  padding-right: 80px;  
+}
+
 .panel {    
     background-color: inherit;
     border: 1px solid transparent;

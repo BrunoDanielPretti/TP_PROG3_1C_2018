@@ -28,7 +28,9 @@
         $("#myModal").attr("style", "display: block");
     }
 
-    function Modal_Cerrar(){           
+    function Modal_Cerrar(){
+        console.log("Modal_Cerrar()");
+        $("#myModal").html("");             
         $("#myModal").attr("style", "display: none");
     }
    
@@ -72,7 +74,7 @@
     }
 
     function btnSesion(){
-        console.log("%cbntSesion()", azul);
+        console.log("%cbntSesion()", azul);        
         NexoP("menuSesion", "#myModal");
         Modal_Mostrar();
     }
@@ -201,10 +203,10 @@
         //$("#txtClave").attr("placeholder", "admin");        
     }
                     
-    function Prueba(){  // Para probar los Token, no me acuerdo q 
-        var miParam = "Prueba/";
-        miParam += localStorage.getItem("TokenRestauranteChinchilla");                
-        Nexo(miParam);
+    function Prueba(){ 
+        console.log("%cPrueba",verde);              
+        NexoP("menu_producto", "#myModal");
+        Modal_Mostrar();
     }
    
     function borrarToken(){
@@ -225,7 +227,7 @@ $(document).ready(function(){
     window.onclick = function(event) {
         var modal = document.getElementById('myModal');
         if (event.target == modal) {
-            modal.style.display = "none";
+            Modal_Cerrar();
         }
     } 
 

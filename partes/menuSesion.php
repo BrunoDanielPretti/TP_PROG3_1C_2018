@@ -9,7 +9,10 @@
                 <div class="form-group" id="frmTxtUsuario">
                     <label for="txtUsuario" class="col-sm-2 control-label">Usuario:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="txtUsuario" placeholder="Usuario">                
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" id="txtUsuario" placeholder="Usuario"> 
+                        </div>  
                     </div>                        
                 </div>
             <div class="form-group" id="frmTxtClave"> 
