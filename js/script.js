@@ -174,14 +174,18 @@
             $("#principal").html(datos['tabla']);            
             Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
             $("#Tabla_Body").html(StringTabla);
-            $("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar'>Agregar</button>");                        
+            $("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");
+            
+            
         })    
     }
 
     function Tabla_ArmarHead(pArray){
         var string = "";
+        var cont = 1;
         pArray.forEach(element => {
-            string = string+"<th>"+element+"</th>";
+            string = string+"<th onclick=\"w3.sortHTML('#Tabla_General','.item', 'td:nth-child("+cont+")')\">"+element+"</th>";
+            cont++;
         });        
         $("#Tabla_Head").html(string);
     }
@@ -230,5 +234,7 @@ $(document).ready(function(){
             Modal_Cerrar();
         }
     } 
+   
 
 });
+

@@ -1,4 +1,4 @@
-<table class='table'>
+<table class='table' id='Tabla_General'>
     <thead >
         <tr id='Tabla_Head'>
 

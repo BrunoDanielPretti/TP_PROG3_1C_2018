@@ -54,7 +54,10 @@ EO2;
                         </ul>
                         <ul class="nav navbar-nav navbar-left">           
                             <li><a href="#" onclick="Prueba()" class="navbar-brand" id="">Prueba</a></li>                            
-                        </ul>                                                              
+                        </ul>
+                        <ul class="nav navbar-nav navbar-left">           
+                            <li><a href="#" onclick="w3.sortHTML('#Tabla_General','.item', 'td:nth-child(2)')" class="navbar-brand" id="">Sort</a></li>                            
+                        </ul>                                                                 
                         <ul class="nav navbar-nav navbar-right">                            
                             <li><a href="#" onclick="btnSesion()" class="navbar-brand" id="">Usuario</a></li>
                         </ul>
