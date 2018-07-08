@@ -110,13 +110,52 @@
         }
     });
 
+    $app->get('/Usuarios[/]', function(Request $request, Response $response){                
+        $resultado = Usuario::TraerTodosLosUsuarios();              
+        if($resultado != false){
+            $HTML_Datos = Usuario::UsuariosTablaHTML($resultado);
+            $HTML_Tabla = file_get_contents('partes/TablaUsuarios.php',TRUE);
+            $HTML_Tab =   file_get_contents('partes/empleados_tab.php',TRUE);
+            $envio = array('tabla'=>$HTML_Tabla, 'usuarios'=>$HTML_Datos, 'tab'=>$HTML_Tab);
+            
+            echo json_encode($envio);                       
+        }else{
+            echo "error";
+        }           
+    });
+
+    $app->post('/AgregarUsuario', function(Request $request, Response $response){  
+        
+        $parametros = $request->getParsedBody();
+        $datos = array(
+            'usuario'=>$parametros['usuario'],
+            'clave'=>$parametros['clave'],
+            'nombre'=>$parametros['nombre'],
+            'apellido'=>$parametros['apellido'],
+            'telefono'=>$parametros['telefono'],
+            'dni'=>$parametros['dni'],
+            'tipo'=>$parametros['tipo'],
+            'comentario'=>$parametros['comentario']
+        );
+        
+        echo Usuario::AgregarUsuario($datos);
+        
+
+        /*
+        if(Usuario::AgregarUsuario($ArrayDeParametros) == 1){
+            echo json_encode("ASDASD");
+        }
+        */
+        //echo json_encode($parametros);              
+        //return $response->withJson("error", 406);
+    });
 
 //---------------------------------  PRODUCTOS --------------------------------------------------//
     $app->get('/Productos[/]', function(Request $request, Response $response){                
         $resultado = Producto::TraerTodosLosProductos();              
         if($resultado != false){
             $HTML_Productos = Producto::ProductosHTML($resultado);
-            $HTML_Tabla = file_get_contents('partes/TablaUsuarios.php',TRUE);
+            $HTML_Tabla = file_get_contents('partes/TablaUsuarios.php',TRUE);           
             $envio = array('tabla'=>$HTML_Tabla, 'productos'=>$HTML_Productos);
             
             echo json_encode($envio);                       

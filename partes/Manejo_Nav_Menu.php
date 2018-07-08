@@ -47,7 +47,7 @@ EO2;
                             <li><a href="#" onclick="NexoMesa()" class="navbar-brand" id="">Mesas</a></li>                            
                         </ul>    
                         <ul class="nav navbar-nav navbar-left">                                                                                         
-                            <li><a href="#" onclick="NexoP('TablaUsuarios')" class="navbar-brand" id="">Personal</a></li>
+                            <li><a href="#" onclick="NexoEmpleados()" class="navbar-brand" id="">Personal</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-left">           
                             <li><a href="#" onclick="NexoProductos()" class="navbar-brand" id="">Productos</a></li>                            

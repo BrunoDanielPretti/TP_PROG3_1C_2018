@@ -3,7 +3,6 @@
     <button class="tablinks" onclick="openCity(event, 'Mesas_EnPreparacion')">En Preparacion</button>
     <button class="tablinks" onclick="openCity(event, 'Mesas_Comiendo')">Comiendo</button>
     <button class="tablinks" onclick="openCity(event, 'Mesas_Cerradas')">Cerradas</button>
-
 </div>
 
 <!-- Tab content -->

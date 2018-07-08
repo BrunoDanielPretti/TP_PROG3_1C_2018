@@ -49,21 +49,20 @@
         }
 
         public function ModificarProducto($pParam){
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $Id = $pParam["Id"];
-            $Nombre = $pParam["Nombre"];            
-            $Precio = $pParam["Precio"];
-            $Tipo = $pParam["Tipo"];
-
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();          
             $consulta = $objetoAccesoDato->RetornarConsulta(
                 "UPDATE productos
                 SET 
-                    nombre = '$Nombre',
-                    precioVenta = '$Precio',
-                    tipo = '$Tipo'
-                WHERE id = '$Id'"
-                
-            );       
+                    nombre = '$pParam[Nombre]',
+                    precioVenta = '$pParam[Precio]',
+                    tipo = '$pParam[Tipo]'
+                WHERE id = '$pParam[Id]'"
+                /*
+                nombre = '$Nombre',
+                precioVenta = '$Precio',
+                tipo = '$Tipo'
+                */
+            );             
             return $consulta->execute();
         }
 

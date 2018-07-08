@@ -33,30 +33,12 @@
             return "La clase Usuario anda";
         }
 
-        public function TipoToString(){
-            switch ($this->tipo) {
-                case 1:
-                    return "Socio";
-                    break;
-                case 2:
-                    return "Bartender";
-                    break;
-                case 3:
-                    return "Cervecero";
-                    break;
-                case 4:
-                    return "Cocinero";
-                    break;
-                case 5:
-                    return "Mozo";
-                    break;                
-            }
-        }
+        
 //--------------------------------- PDO ---------------------------------//
         public static function TraerTodosLosUsuarios(){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
             $consulta =$objetoAccesoDato->RetornarConsulta(
-                "SELECT usuario, nombre, apellido, tipo
+                "SELECT usuario, nombre, apellido, tipo, estado, id
                  FROM usuarios");
             $consulta->execute();   
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");
@@ -81,8 +63,110 @@
             return false;
         }
 
-    }
+        public static function AgregarUsuario($pParam){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+            
+            $tipoInt = Usuario::TipoToInt($pParam['tipo']);            
+            
+            
+            $consulta =$objetoAccesoDato->RetornarConsulta(
+                "INSERT INTO `usuarios`(`usuario`, `clave`, `tipo`, `estado`, `nombre`, `apellido`, `DNI`, `telefono`, `comentario`)
+                 VALUES (
+                    '$pParam[usuario]',
+                    '$pParam[clave]',
+                    $tipoInt,
+                    1,
+                    '$pParam[nombre]',
+                    '$pParam[apellido]',
+                    '$pParam[dni]',
+                    '$pParam[telefono]',
+                    '$pParam[comentario]'
+                 )
+                ");
+            
+            //echo $tipoInt;
+            return $consulta->execute();              
+        }
 
+        public function UsuariosTablaHTML($pUsuarios){
+            $cont = 0;
+            $string = array();
+            
+            foreach ($pUsuarios as $key) {
+                $tipo = $key->TipoToString();
+                $estado = $key->EstadoToString();
+                $colorEstado = $estado["estilo"];
+                $estado = $estado["string"];
+                $string[$cont] =
+                <<<E01
+                    <tr class='td-br item' onclick="alert('$key->id')">                        
+                        <td>$key->nombre $key->apellido</td>                        
+                        <td>$tipo</td>
+                        <td $colorEstado>$estado</td>
+                    </tr>
+E01;
+                $cont++;
+            }
+            return $string;
+        }
+//---------------------------------------------------------------------//    
+        public function TipoToString(){
+            switch ($this->tipo) {
+                case 1:
+                    return "Socio";
+                    break;
+                case 2:
+                    return "Bartender";
+                    break;
+                case 3:
+                    return "Cervecero";
+                    break;
+                case 4:
+                    return "Cosinero";
+                    break;
+                case 5:
+                    return "Mozo";
+                    break;                
+            }
+        }
+
+        public static function TipoToInt($pParam){
+            switch ($pParam) {
+                case 'Socio':
+                    return 1;
+                    break;
+                case 'Bartender':
+                    return 2;
+                    break;
+                case 'Cervecero':
+                    return 3;
+                    break;
+                case 'Cosinero':
+                    return 4;
+                    break;
+                case 'Mozo':
+                    return 5;
+                    break;                
+                default:
+                    # code...
+                    break;
+            }            
+        }
+
+        public function EstadoToString(){
+            $estado = [];
+            if($this->estado == 1){
+                $estado['estilo'] = "style='color: green'";
+                $estado['string'] = "Activo";
+            }else{
+                $estado['estilo'] = "style='color: red'";
+                $estado['string'] = "Inactivo";
+            }
+            return $estado;
+        }
+    }//FIN de la clase Usuario
+
+        
 
 
 ?>

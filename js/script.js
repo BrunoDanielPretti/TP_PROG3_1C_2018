@@ -81,7 +81,7 @@
     
 }
 
-{//------------------------  MESAS  ---------------------------------//
+{//---------------------------  MESAS  ---------------------------------//
     function NexoMesa(){
         console.log("%cNexoMesa()", azul);
         NexoP("Mesas_Tab", "#TabZone-1");        
@@ -154,7 +154,7 @@
     } 
 }
 
-{//------------------------  PODUCTOS  ---------------------------------//
+{//--------------------------  PODUCTOS  ---------------------------------//
     function NexoProductos(){
         console.log("%cNexoProductios()", azul);        
         $.ajax({
@@ -174,9 +174,7 @@
             $("#principal").html(datos['tabla']);            
             Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
             $("#Tabla_Body").html(StringTabla);
-            $("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");
-            
-            
+            //$("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");                        
         })    
     }
 
@@ -242,6 +240,130 @@
         }) 
              
     }
+}
+
+{//--------------------------  EMPLEADOS  ---------------------------------//
+    function NexoEmpleados(){
+        console.log("%cNexoNexoEmpleados()", azul);        
+        $.ajax({
+            url: "nexo.php/Usuarios",
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            //console.log(datos);
+            datos = JSON.parse(datos);                         
+            //alert(datos["productos"]);            
+            var StringTabla = "";                                 
+            for (let index = 0; index < datos['usuarios'].length; index++){
+                StringTabla = StringTabla+datos['usuarios'][index];
+            }            
+            Zonas_Refresh();
+            $("#principal").html(datos['tabla']);            
+            $("#TabZone-1").html(datos['tab']);            
+            Tabla_ArmarHead( ["Nombre", "Puesto", "Estado"] );            
+            $("#Tabla_Body").html(StringTabla);
+            $("#Tabla_General").attr("style", "margin-top: 20px");
+            //$("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");                        
+        })    
+    }
+    //------- Botones de tab empleados ------//
+    function btn_NuevoEmpleado(){
+        console.log("%cbtn_NuevoEmpleado()", azul);
+
+        pagina = pNexo+"partes/menu_usuario"; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET"
+        }).done(function(datos){
+            $("#myModal").html(datos);
+            $("#btn_usuario_Modificar").hide();
+            $("#btn_usuario_Activar").hide();
+            $("#btn_usuario_Desactivar").hide();
+            $("#head_spam").html("   Nuevo Usuario");
+        })            
+        Modal_Mostrar();
+    }    
+    function btn_Empleados_Activos(){
+        console.log("%cbtn_Empleados_Activos()", azul);
+    }
+    function btn_Empleados_Inactivos(){
+        console.log("%cbtn_Empleados_Inactivos()", azul);
+    }
+    function btn_Empleados_Todos(){
+        console.log("%cbtn_Empleados_Todos", azul);
+    }
+    //------ Botones de menu_usuario ---------//
+    function usuario_alta(){
+        console.log("%cusuario_alta()", azul);
+
+       
+        if($("#Clave_txt").val() == $("#Clave2_txt").val()){
+            var enviar = {
+                usuario: $("#Usuario_txt").val(),
+                clave: $("#Clave_txt").val(),
+                nombre: $("#Nombre_txt").val(),
+                apellido: $("#Apellido_txt").val(),
+                telefono: $("#Telefono_txt").val(),
+                dni: $("#Dni_txt").val(),
+                tipo: $("#select_puesto").val(),
+                comentario: $("#Comentario_txt").val()
+            }
+            //console.log(enviar);
+
+            $.ajax({
+                url: pNexo+"AgregarUsuario",                
+                method: "POST",
+                data: enviar,
+                dataType: "text"
+            }).done(function(datos){ 
+                console.log(datos);
+                //datos = JSON.parse(datos);
+                //console.log(datos);                
+            }).fail(function(datos, textEstatus, elError){
+                console.log("%cEntro al Fail", rojo);
+                alert("no se pudo ingresar el usuario");
+            })
+
+            Modal_Cerrar();
+        }else{
+            alert("las contraseñas no coinsiden");
+        }
+        
+        
+        /*
+        $.ajax({
+            url: pNexo+"php/iniciarUsuario",
+            //url: "php/validarUsuario.php",
+            method: "POST",
+            data: enviar,
+            dataType: "text"                        
+        }).done(function(datos){
+            if(datos == "error"){
+                alert("HOLA");
+                $("#frmTxtUsuario").addClass("has-error");
+                $("#frmTxtClave").addClass("has-error");
+                $("#spanTxtClave").removeClass("hidden");            
+            }
+            else{
+                datos = JSON.parse(datos);
+                localStorage.setItem("TokenRestauranteChinchilla", datos['token']);
+                $("#nav-1").html(datos['nav']);
+                //Refresh_Nav();
+                Modal_Cerrar();                
+            }        
+        })
+        */
+    }
+    function usuario_Modificar(){
+        console.log("%cusuario_Modificar()", azul);
+    }
+    function usuario_Desactivar(){
+        console.log("%cusuario_Desactivar()", azul);
+    }
+    function usuario_Activar(){
+        console.log("%cusuario_Activar()", azul);
+    }
+
 }
 
 {//---------------------- DEBUG --------------------------------------//
