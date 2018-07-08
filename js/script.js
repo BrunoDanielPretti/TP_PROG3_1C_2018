@@ -189,6 +189,59 @@
         });        
         $("#Tabla_Head").html(string);
     }
+
+    function MenuProducto(pId){
+        console.log("%cMenuProducto("+pId+")",azul);
+        //NexoP("menu_producto", "#myModal");
+
+        pagina = pNexo+"Productos/"+pId; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            //console.log(datos);
+            datos = JSON.parse(datos);
+            var producto = JSON.parse( datos.producto ) ;
+            producto = producto[0];
+            $("#myModal").html(datos['menu']);                       
+            $("#head_spam").html("    "+producto.nombre);
+            $("#head_icon").attr("src", "./resources/IconsL2/"+producto.foto+".jpg")
+            $("#txtNombre").attr("value", producto.nombre);
+            $("#txtCompra").attr("value", producto.precioVenta);
+            $("[target='"+producto.tipo+"']").attr("selected", "selected")
+            $("#btn_MenuProducto_Aceptar").attr("onclick", "ModificarProducto('"+ producto.id +"')")
+            
+            Modal_Mostrar();
+            
+            //console.log(producto.foto);            
+        })            
+    }
+
+    function ModificarProducto(pId){
+        console.log("%cModificarProducto("+pId+")" ,azul);         
+        
+        var enviar = {
+            Nombre: $("#txtNombre").val(),
+            Precio: $("#txtCompra").val(),
+            Tipo:   $("#select_tipo").val(),
+            Id: pId    
+        };
+        //console.log(enviar, verde);
+        $.ajax({
+            url: pNexo+"Productos/Modificar",            
+            method: "POST",
+            data: enviar,
+            dataType: "text"                        
+        }).done(function(datos){
+            console.log(datos);
+            datos = JSON.parse(datos);
+            Modal_Cerrar();
+            NexoProductos();
+            //console.log(datos["Nombre"]);
+        }) 
+             
+    }
 }
 
 {//---------------------- DEBUG --------------------------------------//

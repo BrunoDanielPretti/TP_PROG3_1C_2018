@@ -34,13 +34,46 @@
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Producto");                
         }
 
+        public function TraerProductoPorID($pId){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta(
+                "SELECT 
+                    id, nombre, precioCompra, precioVenta, foto, tipo, stock
+                FROM productos
+                WHERE id = $pId"
+                
+            );       
+            $consulta->execute();
+            $miProducto = $consulta->fetchAll(PDO::FETCH_CLASS, "Producto");                
+            return json_encode($miProducto);
+        }
+
+        public function ModificarProducto($pParam){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $Id = $pParam["Id"];
+            $Nombre = $pParam["Nombre"];            
+            $Precio = $pParam["Precio"];
+            $Tipo = $pParam["Tipo"];
+
+            $consulta = $objetoAccesoDato->RetornarConsulta(
+                "UPDATE productos
+                SET 
+                    nombre = '$Nombre',
+                    precioVenta = '$Precio',
+                    tipo = '$Tipo'
+                WHERE id = '$Id'"
+                
+            );       
+            return $consulta->execute();
+        }
+
         public function ProductosHTML($pProductos){
             $cont = 0;
             $string = array();
             foreach ($pProductos as $key) {
                 $string[$cont] =
                 <<<E01
-                    <tr class='td-br item' onclick="alert('$key->nombre')">
+                    <tr class='td-br item' onclick="MenuProducto('$key->id')">
                         <td><img class='btn-icon' src='resources/IconsL2/$key->foto.jpg'></td>
                         <td>$key->nombre</td>
                         <td>$key->precioCompra</td>

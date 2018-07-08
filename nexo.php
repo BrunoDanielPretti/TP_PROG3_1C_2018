@@ -109,6 +109,49 @@
             echo "error";
         }
     });
+
+
+//---------------------------------  PRODUCTOS --------------------------------------------------//
+    $app->get('/Productos[/]', function(Request $request, Response $response){                
+        $resultado = Producto::TraerTodosLosProductos();              
+        if($resultado != false){
+            $HTML_Productos = Producto::ProductosHTML($resultado);
+            $HTML_Tabla = file_get_contents('partes/TablaUsuarios.php',TRUE);
+            $envio = array('tabla'=>$HTML_Tabla, 'productos'=>$HTML_Productos);
+            
+            echo json_encode($envio);                       
+        }else{
+            echo "ERROR";
+        }           
+    });
+
+    $app->get('/Productos/{id}', function (Request $request, Response $response, $args) {        
+        $pID = $args['id'];
+        $resultado = Producto::TraerProductoPorID($pID);
+
+        if($resultado != false){
+            $HTML_Menu = file_get_contents('partes/menu_producto.php',TRUE);
+            $Producto  = $resultado;
+            $envio = array('menu'=>$HTML_Menu, 'producto'=>$Producto);
+            echo json_encode($envio);
+        }else{
+            echo "ERROR";
+        }
+
+    });
+
+    $app->post('/Productos/Modificar', function(Request $request, Response $response){
+        $ArrayDeParametros = $request->getParsedBody();
+        
+        if(Producto::ModificarProducto($ArrayDeParametros) == 1){
+            echo json_encode($ArrayDeParametros);
+        }
+                
+        
+
+    });
+
+
 //---------------------------------  PRUEBAS --------------------------------------------------//
     $app->get('/Prueba/{pToken}', function (Request $request, Response $response, $args) {        
         $token = $args['pToken'];
@@ -133,20 +176,7 @@
         }
     });
 
-    $app->get('/Productos[/]', function(Request $request, Response $response){                
-        $resultado = Producto::TraerTodosLosProductos();              
-        if($resultado != false){
-            $HTML_Productos = Producto::ProductosHTML($resultado);
-            $HTML_Tabla = file_get_contents('partes/TablaUsuarios.php',TRUE);
-            $envio = array('tabla'=>$HTML_Tabla, 'productos'=>$HTML_Productos);
-            
-            echo json_encode($envio);                       
-        }else{
-            echo "ERROR";
-        }
-
-           
-    });
+    
 
 
 //---------------------------------------------------------------------------------
@@ -157,37 +187,6 @@ $app->run();
 //$string = file_get_contents('partes/TablaUsuarios.php',TRUE);
 
 
-/*
-<h2>Basic Table</h2>
-<p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
-<table class="table">
-<thead id="Tabla_Head">
-    <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Email</th>
-    </tr>
-</thead>
-<tbody id="Tabla_Body">
-    <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>john@example.com</td>
-    </tr>
-    <tr>
-    <td>Mary</td>
-    <td>Moe</td>
-    <td>mary@example.com</td>
-    </tr>
-    <tr>
-    <td>July</td>
-    <td>Dooley</td>
-    <td>july@example.com</td>
-    </tr>
-</tbody>
-</table>
-
-*/
 ?>
 
 

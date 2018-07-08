@@ -2,7 +2,7 @@
     <div class="panel contentBruno"> 
 
         <div class="panel-heading" >
-            <img class='btn-icon' src='./resources/IconsL2/etc_adena_i00.jpg'>    
+            <img class='btn-icon' id="head_icon" src='./resources/IconsL2/etc_adena_i00.jpg'>    
             <spam id="head_spam">   Producto</spam>
             <spam class="modal-close" onclick="Modal_Cerrar()">&times;</spam>
         </div>
@@ -20,10 +20,10 @@
                 <label for="select_tipo" class="col-sm-2 control-label" style:"padding-left: 200px">Tipo:</label>
                 <div class="col-sm-6">
                     <select class="form-control" id="select_tipo">
-                        <option>Plato</option>  
-                        <option>Bebida</option>
-                        <option>Trago</option>
-                        <option>Postre</option>
+                        <option target="Plato">Plato</option>  
+                        <option target="Bebida">Bebida</option>
+                        <option target="Trago">Trago</option>
+                        <option target="Postre">Postre</option>
                     </select>
                 </div>                
             </div> 
@@ -48,7 +48,7 @@
                     </label>
                 </div>-->
             <div class="form-group col-md-offset-2">
-                <button type="button" class="btn btn-success" onclick="">Aceptar</button>
+                <button type="button" class="btn btn-success" id="btn_MenuProducto_Aceptar" onclick="">Aceptar</button>
                 <button class="btn btn-success" style="float: right" onclick="Modal_Cerrar()">Cancelar</button>
             </div>
                 
