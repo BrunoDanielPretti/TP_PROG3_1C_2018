@@ -18,8 +18,11 @@
             <div class="form-group" id="frmTxtClave"> 
                 <label for="txtClave" class="col-sm-2 control-label">Contraseña:</label>
                 <div class="col-sm-6">
-                    <input type="password" class="form-control" id="txtClave" placeholder="Contraseña">
-                    <span id="spanTxtClave" class="help-block hidden">Usuario o contraseña incorrectos</span>
+                    <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña">
+                        <span id="spanTxtClave" class="help-block hidden">Usuario o contraseña incorrectos</span>
+                        </div>
                 </div>
             </div>
             

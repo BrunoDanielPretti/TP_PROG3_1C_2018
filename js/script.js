@@ -262,7 +262,7 @@
                     
     function Prueba(){ 
         console.log("%cPrueba",verde);              
-        NexoP("menu_producto", "#myModal");
+        NexoP("menu_usuario", "#myModal");
         Modal_Mostrar();
     }
    

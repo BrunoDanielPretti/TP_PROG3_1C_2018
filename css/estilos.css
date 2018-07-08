@@ -8,12 +8,20 @@ body {
 }
 
 
-input[type="text"], input[type="number"], input[type="password"], .form-group select{
+input[type="text"], input[type="number"], input[type="password"], .form-group select,.form-group textarea{
     background-color: rgb(34, 33, 32);
     color: #bebebe;
     border-color: rgb(73, 65, 56);
 }
 
+th, td{  
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer */
+  -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+  cursor: pointer;
+}
 .input-group-addon{
   background-image:         linear-gradient(to bottom, #4d4432 0%, #382f1f 100%);
   color: #bebebe;

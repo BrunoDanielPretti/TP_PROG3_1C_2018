@@ -12,7 +12,7 @@
                 <div class="form-group" id="frmTxtNombre">
                     <label for="txtNombre" class="col-sm-2 control-label">Nombre:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="txtNombre">                
+                        <input type="text" class="form-control" id="txtNombre" autocomplete="off">                
                     </div>                        
                 </div>
 
@@ -33,7 +33,7 @@
 
                 <div class="input-group col-sm-6">
                     
-                    <input type="text" class="form-control" id="txtCompra" style="margin-left: 15px"> 
+                    <input type="text" class="form-control" id="txtCompra" style="margin-left: 15px" autocomplete="off"> 
                     <span class="input-group-addon">
                         <img src='./resources/IconsL2/etc_adena_i00.jpg' height="20" width="20" style="margin-left: 15px">
                     </span>                   
