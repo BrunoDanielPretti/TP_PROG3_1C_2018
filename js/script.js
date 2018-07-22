@@ -295,7 +295,6 @@
     //------ Botones de menu_usuario ---------//
     function usuario_alta(){
         console.log("%cusuario_alta()", azul);
-
        
         if($("#Clave_txt").val() == $("#Clave2_txt").val()){
             var enviar = {
@@ -307,9 +306,7 @@
                 dni: $("#Dni_txt").val(),
                 tipo: $("#select_puesto").val(),
                 comentario: $("#Comentario_txt").val()
-            }
-            //console.log(enviar);
-
+            }           
             $.ajax({
                 url: pNexo+"AgregarUsuario",                
                 method: "POST",
@@ -323,45 +320,98 @@
                 console.log("%cEntro al Fail", rojo);
                 alert("no se pudo ingresar el usuario");
             })
-
             Modal_Cerrar();
         }else{
             alert("las contraseñas no coinsiden");
-        }
+        }                      
+    }
+    function usuario_Modificar(pId){
+        console.log("%cusuario_Modificar("+pId+")", azul);
         
-        
-        /*
+        var enviar = {
+            usuario: $("#Usuario_txt").val(),
+            clave: $("#Clave_txt").val(),
+            nombre: $("#Nombre_txt").val(),
+            apellido: $("#Apellido_txt").val(),
+            telefono: $("#Telefono_txt").val(),
+            dni: $("#Dni_txt").val(),
+            tipo: $("#select_puesto").val(),
+            comentario: $("#Comentario_txt").val(),
+            id: pId
+        }           
         $.ajax({
-            url: pNexo+"php/iniciarUsuario",
-            //url: "php/validarUsuario.php",
+            url: pNexo+"ModificarUsuario",                
             method: "POST",
             data: enviar,
-            dataType: "text"                        
-        }).done(function(datos){
-            if(datos == "error"){
-                alert("HOLA");
-                $("#frmTxtUsuario").addClass("has-error");
-                $("#frmTxtClave").addClass("has-error");
-                $("#spanTxtClave").removeClass("hidden");            
-            }
-            else{
-                datos = JSON.parse(datos);
-                localStorage.setItem("TokenRestauranteChinchilla", datos['token']);
-                $("#nav-1").html(datos['nav']);
-                //Refresh_Nav();
-                Modal_Cerrar();                
-            }        
+            dataType: "text"
+        }).done(function(datos){ 
+            console.log(datos); 
+            Modal_Cerrar();  
+            NexoEmpleados();                             
+        }).fail(function(datos, textEstatus, elError){
+            console.log("%cEntro al Fail", rojo);
+            alert("no se pudo ingresar el usuario");
         })
-        */
+                             
     }
-    function usuario_Modificar(){
-        console.log("%cusuario_Modificar()", azul);
-    }
-    function usuario_Desactivar(){
+
+    function usuario_Desactivar(pId){
         console.log("%cusuario_Desactivar()", azul);
+
+        pagina = pNexo+"Usuarios/desactivar/"+pId; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){             
+             console.log(datos);
+             Modal_Cerrar();
+             NexoEmpleados();
+        })            
     }
-    function usuario_Activar(){
+    function usuario_Activar(pId){
         console.log("%cusuario_Activar()", azul);
+
+        pagina = pNexo+"Usuarios/activar/"+pId; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){             
+             console.log(datos);
+             Modal_Cerrar();
+             NexoEmpleados();
+        })            
+    }
+
+    function Usuario_MenuModificar(pId){
+        console.log("%cUsuario_MenuModificar("+pId+")", azul);
+
+        pagina = pNexo+"Usuarios/"+pId; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            //console.log(datos);
+            datos = JSON.parse(datos);
+            var usuario = JSON.parse( datos.usuario ) ;
+            usuario = usuario[0];
+            $("#myModal").html(datos['menu']);                                 
+            $("#head_spam").html("    "+usuario.usuario);
+            $("[target='Alta']").hide();
+            $("#Nombre_txt").attr("value", usuario.nombre);
+            $("#Apellido_txt").attr("value", usuario.apellido);
+            $("#Telefono_txt").attr("value", usuario.telefono);
+            $("#Dni_txt").attr("value", usuario.DNI);
+            $("#Comentario_txt").html(usuario.comentario);
+            $("[target='"+usuario.tipo+"']").attr("selected", "selected");
+            $("[target='"+usuario.tipo+"']").attr("style", "color: green; font-weight: bold;");
+            $("#btn_usuario_Desactivar").attr("onclick", "usuario_Desactivar("+usuario.id+")");
+            $("#btn_usuario_Activar").attr("onclick", "usuario_Activar("+usuario.id+")");
+            $("#btn_usuario_Modificar").attr("onclick", "usuario_Modificar("+usuario.id+")");          
+            Modal_Mostrar();               
+        })            
     }
 
 }
@@ -393,7 +443,10 @@
         localStorage.setItem("TokenRestauranteChinchilla", undefined);
     }
 
-
+    function asd(){
+        alert("ola q ase");
+        console.log("%cOla q ase consola", rojo);
+    }
 
     
 }
@@ -409,6 +462,7 @@ $(document).ready(function(){
             Modal_Cerrar();
         }
     } 
+
    
 
 });

@@ -9,7 +9,7 @@
 
         <div class="panel-body">
             <form class="form">
-                <div class="form-group col-xs-10 col-sm-6">
+                <div class="form-group col-xs-10 col-sm-6" target="Alta">
                     <label for="">Usuario</label>                    
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -19,7 +19,7 @@
                 <spam class="form-group col-xs-10 col-sm-6"></spam>
                 <div class="clearfix"></div>
 
-                <div class="form-group col-xs-10 col-sm-6">
+                <div class="form-group col-xs-10 col-sm-6" target="Alta">
                     <label for="">Contraseña</label>
                     
                     <div class="input-group">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-xs-10 col-sm-6">
+                <div class="form-group col-xs-10 col-sm-6" target="Alta">
                     <label for="">Repetir Contraseña</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -59,10 +59,10 @@
                 <div class="form-group col-xs-10 col-sm-6">
                     <label for="">Puesto</label>
                     <select class="form-control" id="select_puesto">
-                        <option target="Bartender">Bartender</option>  
-                        <option target="Cervecero">Cervecero</option>
-                        <option target="Cosinero">Cosinero</option>
-                        <option target="Mozo">Mozo</option>
+                        <option target="2">Bartender</option>  
+                        <option target="3">Cervecero</option>
+                        <option target="4">Cosinero</option>
+                        <option target="5">Mozo</option>
                     </select>
                 </div>
                 
@@ -72,7 +72,7 @@
                 </div> 
                                                       
                 <div class="col-xs-10 col-sm-12">
-                    <button class="btn btn-success" id="btn_usuario_alta"       onclick="usuario_alta()">Alta</button>
+                    <button class="btn btn-success" id="btn_usuario_alta"       onclick="usuario_alta()" target="Alta" >Alta</button>
                     <button class="btn btn-success" id="btn_usuario_Modificar"  onclick="usuario_Modificar()">Modificar</button>
                     <button class="btn btn-success" id="btn_usuario_Desactivar" onclick="usuario_Desactivar()">Dar de Baja</button>
                     <button class="btn btn-success" id="btn_usuario_Activar"    onclick="usuario_Activar()">Dar de Alta</button>

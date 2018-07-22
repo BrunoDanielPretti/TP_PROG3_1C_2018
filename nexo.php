@@ -124,30 +124,38 @@
         }           
     });
 
-    $app->post('/AgregarUsuario', function(Request $request, Response $response){  
-        
-        $parametros = $request->getParsedBody();
-        $datos = array(
-            'usuario'=>$parametros['usuario'],
-            'clave'=>$parametros['clave'],
-            'nombre'=>$parametros['nombre'],
-            'apellido'=>$parametros['apellido'],
-            'telefono'=>$parametros['telefono'],
-            'dni'=>$parametros['dni'],
-            'tipo'=>$parametros['tipo'],
-            'comentario'=>$parametros['comentario']
-        );
-        
-        echo Usuario::AgregarUsuario($datos);
-        
-
-        /*
-        if(Usuario::AgregarUsuario($ArrayDeParametros) == 1){
-            echo json_encode("ASDASD");
-        }
-        */
-        //echo json_encode($parametros);              
+    $app->post('/AgregarUsuario', function(Request $request, Response $response){          
+        $parametros = $request->getParsedBody();        
+        echo Usuario::AgregarUsuario($parametros);                      
         //return $response->withJson("error", 406);
+    });
+    $app->post('/ModificarUsuario', function(Request $request, Response $response){          
+        $parametros = $request->getParsedBody();        
+        echo Usuario::ModificarUsuario($parametros);                              
+    });
+
+    $app->get('/Usuarios/{id}', function (Request $request, Response $response, $args) {        
+        $pID = $args['id'];
+        $resultado = Usuario::TraerUsuarioPorID($pID);
+
+        if($resultado != false){
+            $HTML_Menu = file_get_contents('partes/menu_usuario.php',TRUE);
+            $Usuario  = $resultado;
+            $envio = array('menu'=>$HTML_Menu, 'usuario'=>$Usuario);
+            echo json_encode($envio);
+        }else{
+            echo "ERROR";
+        }
+    });
+
+    $app->get('/Usuarios/desactivar/{id}', function (Request $request, Response $response, $args) {        
+        $pID = $args['id'];
+        echo Usuario::DesactivarUsuario($pID)." Desactivado"." $pID"." ".$args['id'];   
+    });
+    $app->get('/Usuarios/activar/{id}', function (Request $request, Response $response, $args) {        
+        $pID = $args['id'];
+        echo $args."\n";
+        echo Usuario::ActivarUsuario($pID)." activado"." $pID"." ".$args['id'];           
     });
 
 //---------------------------------  PRODUCTOS --------------------------------------------------//
@@ -176,7 +184,6 @@
         }else{
             echo "ERROR";
         }
-
     });
 
     $app->post('/Productos/Modificar', function(Request $request, Response $response){

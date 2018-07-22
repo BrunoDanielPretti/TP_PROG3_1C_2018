@@ -64,11 +64,8 @@
         }
 
         public static function AgregarUsuario($pParam){
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            
-            $tipoInt = Usuario::TipoToInt($pParam['tipo']);            
-            
-            
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();             
+            $tipoInt = Usuario::TipoToInt($pParam['tipo']);                                    
             $consulta =$objetoAccesoDato->RetornarConsulta(
                 "INSERT INTO `usuarios`(`usuario`, `clave`, `tipo`, `estado`, `nombre`, `apellido`, `DNI`, `telefono`, `comentario`)
                  VALUES (
@@ -88,6 +85,61 @@
             return $consulta->execute();              
         }
 
+        public static function ModificarUsuario($pParam){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();             
+            $tipoInt = Usuario::TipoToInt($pParam['tipo']);                                    
+            $consulta =$objetoAccesoDato->RetornarConsulta(
+                "UPDATE usuarios
+                 SET
+                    nombre = '$pParam[nombre]',
+                    apellido = '$pParam[apellido]',
+                    telefono = '$pParam[telefono]',
+                    DNI = '$pParam[dni]',
+                    tipo = $tipoInt,
+                    comentario = '$pParam[comentario]'
+                WHERE id = $pParam[id]
+                ");
+            
+            return $consulta->execute(); 
+        }
+
+        public static function DesactivarUsuario($pId){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();                                  
+            $pId = (int)$pId;
+            
+            $consulta =$objetoAccesoDato->RetornarConsulta(
+                "UPDATE usuarios
+                 SET estado = 0
+                 WHERE id = $pId
+                ");                        
+            return $consulta->execute();              
+        }
+
+        public static function ActivarUsuario($pId){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();                                  
+            $pId = (int)$pId;
+            
+            $consulta =$objetoAccesoDato->RetornarConsulta(
+                "UPDATE usuarios
+                 SET estado = true
+                 WHERE id = $pId
+                ");                        
+            return $consulta->execute();              
+        }
+
+        public function TraerUsuarioPorID($pId){
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta(
+                "SELECT 
+                   `id`, `usuario`, `clave`, `tipo`, `estado`, `nombre`, `apellido`, `DNI`, `telefono`, `comentario`
+                FROM usuarios
+                WHERE id = $pId"                
+            );       
+            $consulta->execute();
+            $miProducto = $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");                
+            return json_encode($miProducto);
+        }
+
         public function UsuariosTablaHTML($pUsuarios){
             $cont = 0;
             $string = array();
@@ -99,7 +151,7 @@
                 $estado = $estado["string"];
                 $string[$cont] =
                 <<<E01
-                    <tr class='td-br item' onclick="alert('$key->id')">                        
+                    <tr class='td-br item' onclick="Usuario_MenuModificar('$key->id')">                        
                         <td>$key->nombre $key->apellido</td>                        
                         <td>$tipo</td>
                         <td $colorEstado>$estado</td>
@@ -109,6 +161,8 @@ E01;
             }
             return $string;
         }
+
+        
 //---------------------------------------------------------------------//    
         public function TipoToString(){
             switch ($this->tipo) {

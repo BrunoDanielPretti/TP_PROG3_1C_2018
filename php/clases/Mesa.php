@@ -70,7 +70,8 @@
                     Ola q ase<br>
                     <spam class="btn btn-success">Boton</spam><br><br><br>
                 </div>
-            </div>
+                <div class="clearfix"></div>
+            </div>            
 E01;
             if($contRow == 2){
                 $string[$cont]['string'] = "</div>";
