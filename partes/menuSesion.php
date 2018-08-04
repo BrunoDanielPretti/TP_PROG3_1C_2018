@@ -20,9 +20,9 @@
                 <div class="col-sm-6">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña">
-                        <span id="spanTxtClave" class="help-block hidden">Usuario o contraseña incorrectos</span>
+                        <input type="password" class="form-control" id="txtClave" placeholder="Contraseña">                        
                     </div>
+                    <span id="spanTxtClave" class="help-block hidden">Usuario o contraseña incorrectos</span>
                 </div>
             </div>
             

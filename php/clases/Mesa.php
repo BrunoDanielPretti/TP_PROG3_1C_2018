@@ -65,16 +65,12 @@
                 <div class="panel-body" id="">                                  
                     <spam>Estado: $estado</spam><br>                    
                     <spam>Pedido: $key->pedido</spam>
-                </div>
-                <div class="panel-footer" target="$key->id" style="display: none;">                                  
-                    Ola q ase<br>
-                    <spam class="btn btn-success">Boton</spam><br><br><br>
-                </div>
+                </div>                
                 <div class="clearfix"></div>
             </div>            
 E01;
             if($contRow == 2){
-                $string[$cont]['string'] = "</div>";
+                $string[$cont]['string'] = $string[$cont]['string']."</div>";
             }
             $string[$cont]['estado'] = $key->estado;
             $cont++;
@@ -85,7 +81,12 @@ E01;
             }
             }
             return $string;
-           
+            /*
+                <div class="panel-footer" target="$key->id" style="display: none;">                                  
+                    Ola q ase<br>
+                    <spam class="btn btn-success">Boton</spam><br><br><br>
+                </div>
+            */
         }
 
 

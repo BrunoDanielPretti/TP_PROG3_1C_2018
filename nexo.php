@@ -3,6 +3,8 @@
     use \Psr\Http\Message\ServerRequestInterface as Request;
     use \Psr\Http\Message\ResponseInterface as Response;
 
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+
     require 'vendor/autoload.php';
     require 'php/clases/AutentificadorJWT.php';
     require 'php/clases/AccesoDatos.php';
@@ -11,6 +13,7 @@
     require 'php/clases/Producto.php';
     require 'partes/Manejo_Nav_Menu.php';
 
+    
     //\slim\Slim::registerAutoloader();
     //$app = new \Slim\App();
 
@@ -95,19 +98,22 @@
         $usuario = $ArrayDeParametros['usuario'];
         $clave   = $ArrayDeParametros['clave'];
 
-        $resultado = Usuario::BuscarPorSesion($usuario, $clave);
+        $resultado = Usuario::BuscarPorSesion($usuario, $clave);        
         
         if($resultado != false){
-            $datos= array('usuario' => $usuario, 'clave' => $clave, 'tipo' => $resultado);
+            $resultado = $resultado[0];
+            $resultado->Sesion_log_date();
+            $datos= array('usuario' => $usuario, 'clave' => $clave, 'tipo' => $resultado->tipo);
             $token = AutentificadorJWT::CrearToken($datos);
 
-            $navMenu = MANEJO_NAV_MENU($resultado, $usuario);
+            $navMenu = MANEJO_NAV_MENU($resultado->tipo, $usuario);
             
             $envio = array('token' => $token, 'nav' => $navMenu);
             echo json_encode($envio);
         }else{
-            echo "error";
+            return $response->withStatus(400); //400 Bad Request
         }
+        
     });
 
     $app->get('/Usuarios[/]', function(Request $request, Response $response){                
@@ -211,18 +217,51 @@
         }                        
     });
 
+    $app->get('/Prueba', function (Request $request, Response $response, $args) {             
+        $resultado = Usuario::BuscarPorSesion("admin", "admin");
+        //$resultado = json_decode($resultado);
+        echo $resultado->Sesion_log_date();
+        //var_dump($resultado);
+    });
+
+
     $app->get('/Mesas[/]', function(Request $request, Response $response){                
         $resultado = Mesa::TraerTodasLasMesas();              
         if($resultado != false){
             $HTMLMesas = Mesa::MesasHTML($resultado);
+            
             return json_encode($HTMLMesas);            
             //return $HTMLMesas;
         }else{
-            echo "ERROR";
+            //echo "ERROR";
+            return $response->withJson($resultado, 405);
         }
     });
 
-    
+    $app->get('/GetTime', function(){
+        $file = 'data/prueba.json';
+        $item = array();
+        $item["usuario"] = "Usuario Random";
+        $miDate =  date("o-m-d_G-i-s");       
+        $item["date"] = $miDate;
+
+        $persona = array("usuario" => $item["usuario"], "date" => $item["date"] );
+                
+        if(file_exists(__DIR__."/".$file)){  
+            $tempArray = file_get_contents($file); 
+            $tempArray = json_decode($tempArray);   
+        }else{           
+            $tempArray = array();
+        }        
+                                                            
+        //array_push($tempArray, $miDate);
+        array_push($tempArray, $persona);
+        $json_string = json_encode($tempArray);
+               
+        file_put_contents($file, $json_string);
+
+        echo $json_string;                                
+    });
 
 
 //---------------------------------------------------------------------------------

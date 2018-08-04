@@ -46,21 +46,43 @@
 
         public static function TraerUsuarios(){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT usuario, clave, tipo FROM usuarios");
+            $consulta =$objetoAccesoDato->RetornarConsulta("SELECT id, usuario, clave, tipo FROM usuarios");
             $consulta->execute();   
             return $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");
         }
 
-        public static function BuscarPorSesion($pUsuario, $pClave){
-            $listaUsuarios = Usuario::TraerUsuarios();
+        public static function BuscarPorSesion($pUsuario, $pClave){                                      
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+            $consulta = $objetoAccesoDato->RetornarConsulta(
+                "SELECT 
+                   id, tipo
+                FROM usuarios
+                WHERE usuario = '$pUsuario' AND clave = '$pClave'"                
+            );   
+            $consulta->execute();                  
+            $miProducto = $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");                
+            return $miProducto;            
+        }
 
-            for ($i=0; $i < count($listaUsuarios); $i++) { 
-                if($listaUsuarios[$i]->usuario == $pUsuario && $listaUsuarios[$i]->clave == $pClave)
-                {
-                    return $listaUsuarios[$i]->tipo;
-                }
-            }
-            return false;
+        public function Sesion_log_date(){            
+            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();                        
+            $date = date("o-m-d");
+            $time = date("G:i:s");   
+            
+            $id = 2;                                 
+            $consulta =$objetoAccesoDato->RetornarConsulta(
+                "INSERT INTO `log_login`(`id`, date, time)
+                 VALUES (
+                    $this->id,
+                    '$date',
+                    '$time'
+                 )
+                ");
+            
+            //echo $tipoInt;
+            $consulta->execute();   
+            
+            //return $this->id." ola q ase";
         }
 
         public static function AgregarUsuario($pParam){

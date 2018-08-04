@@ -8,6 +8,7 @@
             type: metodo
         }).done(function(datos){
             $(destino).html(datos);
+            //console.log(datos);
         })    
     }
 
@@ -56,21 +57,23 @@
             method: "POST",
             data: enviar,
             dataType: "text"                        
-        }).done(function(datos){
-            if(datos == "error"){
-                alert("HOLA");
-                $("#frmTxtUsuario").addClass("has-error");
-                $("#frmTxtClave").addClass("has-error");
-                $("#spanTxtClave").removeClass("hidden");            
-            }
-            else{
+        }).done(function(datos){            
                 datos = JSON.parse(datos);
                 localStorage.setItem("TokenRestauranteChinchilla", datos['token']);
                 $("#nav-1").html(datos['nav']);
                 //Refresh_Nav();
-                Modal_Cerrar();                
-            }        
-        })
+                Modal_Cerrar();                            
+        }).fail(function(datos, textEstatus, elError){
+            if(datos.status == 400){               
+                $("#frmTxtUsuario").addClass("has-error");
+                $("#frmTxtClave").addClass("has-error");
+                $("#spanTxtClave").removeClass("hidden");                      
+            }else{
+                console.log("Error desconocido: "+datos.status+" "+elError);
+            }
+            
+           
+        }) 
     }
 
     function btnSesion(){
@@ -89,11 +92,14 @@
             url: "Mesas",
             type: "GET"
         }).done(function(datos){
+            //console.log(datos);
             datos = JSON.parse(datos);
             tablaTodos = ""; tablaPreparacion=""; tablaCerradas=""; tablaComiendo="";
             //TablaPreparacion = "";
+            console.log("datos.length: "+datos.length);
 
             for (let index = 0; index < datos.length; index++) {
+                //console.log("index: "+index+" - "+datos[index]['string']);
                 tablaTodos = tablaTodos+datos[index]['string'];
                 switch (datos[index]['estado']) {
                     case 0:
@@ -114,19 +120,15 @@
             $("#HTML_Mesas_Comiendo").html(tablaComiendo);
 
             openCity(event, 'Mesas_Todas');
+        }
+        ).fail(function(data){
+            console.log(data["responseText"]);
         })    
     }
 
     function Tarjeta_Show(pParam){
-        var target = $("[target='"+pParam+"']");
-        if(target.attr("style") == "display: none;"){
-            $(".panel-footer").hide();                        
-            //target.show();            
-            target.slideDown("fast");            
-        }else{
-            //target.hide();            
-            target.slideUp("fast");
-        }                            
+        NexoP("menu_mesa_gestion", "#myModal");        
+        Modal_Mostrar();
     }
 }
 
@@ -430,9 +432,17 @@
         //$("#txtUsuario").attr("placeholder", "admin");
         //$("#txtClave").attr("placeholder", "admin");        
     }
-                    
-    function Prueba(){ 
-        console.log("%cPrueba",verde);              
+    
+    function Prueba(){
+        console.log("%cPrueba",verde);
+        //Nexo("GetTime");
+        Nexo("Prueba");
+        //NexoP("ficha_usuario", "#myModal");
+        //Modal_Mostrar();
+    }
+
+    function Prueba__menu_usuario(){ 
+        console.log("%cPrueba__menu_usuario()",verde);              
         NexoP("menu_usuario", "#myModal");
         Modal_Mostrar();
     }
