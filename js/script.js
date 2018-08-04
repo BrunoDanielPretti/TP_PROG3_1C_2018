@@ -95,7 +95,6 @@
 
             for (let index = 0; index < datos.length; index++) {
                 tablaTodos = tablaTodos+datos[index]['string'];
-                
                 switch (datos[index]['estado']) {
                     case 0:
                     tablaCerradas = tablaCerradas+datos[index]['string'];
