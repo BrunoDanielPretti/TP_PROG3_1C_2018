@@ -33,6 +33,7 @@
         console.log("Modal_Cerrar()");
         $("#myModal").html("");             
         $("#myModal").attr("style", "display: none");
+        
     }
    
 }
@@ -173,7 +174,7 @@
             }
             Zonas_Refresh();
             $("#principal").html(datos['tabla']);            
-            Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] );            
+            $("#Tabla_Head").html( Tabla_ArmarHead( ["Img", "Producto", "Compra", "Venta", "Tipo"] ) );             
             $("#Tabla_Body").html(StringTabla);
             //$("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");                        
         })    
@@ -186,7 +187,8 @@
             string = string+"<th onclick=\"w3.sortHTML('#Tabla_General','.item', 'td:nth-child("+cont+")')\">"+element+"</th>";
             cont++;
         });        
-        $("#Tabla_Head").html(string);
+        //$("#Tabla_Head").html(string);
+        return string;
     }
 
     function MenuProducto(pId){
@@ -261,7 +263,8 @@
             Zonas_Refresh();
             $("#principal").html(datos['tabla']);            
             $("#TabZone-1").html(datos['tab']);            
-            Tabla_ArmarHead( ["Nombre", "Puesto", "Estado"] );            
+            $("#Tabla_Head").html( Tabla_ArmarHead( ["Nombre", "Puesto", "Estado"] ) );
+            //Tabla_ArmarHead( ["Nombre", "Puesto", "Estado"] );            
             $("#Tabla_Body").html(StringTabla);
             $("#Tabla_General").attr("style", "margin-top: 20px");
             //$("#TabZone-1").html("<button  class='btn btn-success' id='btnAgregar' '>Agregar</button>");                        
@@ -417,6 +420,99 @@
 
 }
 
+{//--------------------------  Pedidos  ---------------------------------//
+    function Menu_Pedido(){
+        console.log("%cMenu_Pedido()", azul);
+        $.ajax({
+            url: "MenuPedidos",
+            type: "GET"
+        }).done(function(datos){            
+            datos = JSON.parse(datos);        
+
+            $("#myModal").html(datos.menu);
+            $("#myModal2").html(datos.tabla);            
+            $("#myModal2").find("#Tabla_Body").html(datos.productos);            
+            $("#myModal2").find("#Tabla_Head").html( Tabla_ArmarHead( ["Img", "Nombre", "Tipo", "Precio"] ) );
+          
+            $("#btn_Agregar_Producto").click(function(){ $("#myModal2").attr("style", "display: block");}); 
+
+            datos.mesas.forEach(key => {
+                if(key.estado == 0){
+                    $("#select_mesa").append("<option>"+key.id+"</option>");
+                    console.log(key.id);
+                }                
+            });
+            $("#select_mesa").change(function(){
+                $("#head_spam").html("Mesa: " + $("#select_mesa").val() );
+                //console.log("event Handler");
+            })
+            Modal_Mostrar();        
+        }
+        ).fail(function(data){
+            console.log(data["responseText"]);
+        }) 
+    }
+
+    function Agregar_Producto_Al_Pedido(pId){
+        console.log("%cAgregar_Producto_Al_Pedido("+pId+")", azul);
+        
+        pagina = pNexo+"ProductoPedido/"+pId; // "nexo.php/partes/menuSesion"
+        $.ajax({
+            url: pagina,
+            type: "GET",
+            dataType: "text"
+        }).done(function(datos){
+            console.log(datos);
+            $("#Tabla_Pedido_Body").append(datos);
+            $("#myModal2").attr("style", "display: none");
+            $("#Tabla_Pedido_Head").html( Tabla_ArmarHead( ["Img", "nombre","Tipo", "Precio", "Total"] ) );
+            $("#Tabla_Pedido_Head").append("<th colspan='4' >Cantidad</th>");
+            $("[class='td-btn']").unbind("click");
+            $("[class='td-btn']").click( MenuPedido_Aumentar_Disminuir );
+            MenuPedido_Actualizar_Precio();
+        })                     
+    }
+
+    function MenuPedido_Actualizar_Precio(){        
+        console.log("%cMenuPedido_Actualizar_Precio()", azul);
+        total = 0;
+        $("[name='Precio_Venta']").each(function(key){
+            total = total + parseInt( $(this).text() );
+        });
+        console.log("total: "+total);
+        $("#Labet_Total").html("$"+total);        
+    }
+
+    function MenuPedido_Aumentar_Disminuir(){        
+        console.log("%cMenuPedido_Aumentar_Disminuir()", azul);
+        TagUnidad =  $(this).parent().find("[name='Precio_Unidad']");
+        TagVenta  =  $(this).parent().find("[name='Precio_Venta']");
+        TagCantidad = cant = $(this).parent().find("[name='txt_cant']");
+        Precio_Unidad = parseInt( TagUnidad.html() );
+        Precio_venta  = parseInt( TagVenta.html() );
+
+        switch ( $(this).attr("name") ) {
+            case "btn_Aumentar":
+                console.log("Aumentar "+Precio_Unidad);
+                TagVenta.html( Precio_venta + Precio_Unidad);                
+                TagCantidad.val( parseInt( TagCantidad.val() ) +1 );              
+                break;
+            case "btn_Disminuir":
+                console.log("Disminuir "+Precio_Unidad);                
+                TagVenta.html( Precio_venta - Precio_Unidad);               
+                TagCantidad.val( parseInt( TagCantidad.val() ) -1 );
+                if(TagCantidad.val() <= 0)
+                    $(this).parent().remove();
+                break;
+            case "btn_Eliminar":             
+                $(this).parent().remove();                
+                break;        
+            default:
+                break;            
+        }
+        MenuPedido_Actualizar_Precio();
+    }
+}
 {//---------------------- DEBUG --------------------------------------//
     //---------------------------colores-----------------------
     var verde = "color: greenyellow";
@@ -434,12 +530,10 @@
     }
     
     function Prueba(){
-        console.log("%cPrueba",verde);
-        //Nexo("GetTime");
-        Nexo("Prueba");
-        //NexoP("ficha_usuario", "#myModal");
-        //Modal_Mostrar();
+        console.log("%cPrueba",verde);                              
     }
+
+    
 
     function Prueba__menu_usuario(){ 
         console.log("%cPrueba__menu_usuario()",verde);              
@@ -463,16 +557,18 @@
 
 $(document).ready(function(){
 
-    console.log("Inicio la pagina!!");
+    console.log("Inicio script.js");
 
     window.onclick = function(event) {
         var modal = document.getElementById('myModal');
+        var modal2 = document.getElementById('myModal2');
+
         if (event.target == modal) {
             Modal_Cerrar();
         }
-    } 
-
-   
-
+        if (event.target == modal2) {                      
+            $("#myModal2").attr("style", "display: none");
+        }       
+    }    
 });
 

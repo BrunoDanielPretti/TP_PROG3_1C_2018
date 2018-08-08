@@ -2,10 +2,13 @@ window.onload = function(){
  
     var miToken = localStorage.getItem("TokenRestauranteChinchilla");
 
-    if(miToken != null){                
+    if(miToken != undefined){                
         Token_EnviarParaNavMenu();
+        console.log("inicio.js: se ENVIO el Token");
+
     }else{
-        $("#principal").html("No existe el token")
+        $("#principal").html("No existe el token");
+        console.log("inicio.js: No Existe el Token")
         NexoP("navbar", "#NavbarZone");
     }
 

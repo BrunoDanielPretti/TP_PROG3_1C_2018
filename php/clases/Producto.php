@@ -85,6 +85,59 @@ E01;
             return $string;
         }
 
+        public function HTML_Pedidos($pProductos){
+            $cont = 0;
+            $string = array();
+            foreach ($pProductos as $key) {
+                $string[$cont] =
+                <<<E02
+                    <tr class='td-br item' onclick="Agregar_Producto_Al_Pedido('$key->id')">
+                        <td><img class='btn-icon' height="26" width="26" src='resources/IconsL2/$key->foto.jpg'></td>
+                        <td>$key->nombre</td>  
+                        <td>$key->tipo</td>                      
+                        <td>$key->precioVenta</td>                                                                        
+                    </tr>
+E02;
+                $cont++;
+            }
+            return $string;
+        }
+
+        public function HTML_Producto_Para_Pedido($pId){
+            $key = Producto::TraerProductoPorID($pId);
+            $key = json_decode($key);
+            $key = $key[0];
+            $string =
+                <<<E02
+                    <tr class='td-br item'>
+                        <td class="td2"><img class='btn-icon' height="30" width="30" src='resources/IconsL2/$key->foto.jpg'></td>
+                        <td class="td2">$key->nombre</td> 
+                        <td class="td2">$key->tipo</td>                       
+                        <td name="Precio_Unidad" class="td2">$key->precioVenta</td>
+                        <td name="Precio_Venta" class="td2">$key->precioVenta</td>
+                        <td name="btn_Disminuir" class="td-btn"> <i class="glyphicon glyphicon-chevron-left"></i> </td>
+                        <td class="td2">    <input name="txt_cant" type="text" class="form-control" cant="$key->id" value="1"> </td>                        
+                        <td name="btn_Aumentar" class="td-btn"> <i class=" glyphicon glyphicon-chevron-right "></i> </td>
+                        <td name="btn_Eliminar" class="td-btn"> <i class="glyphicon glyphicon-remove"></i> </td>
+                        
+                        
+                    </tr>
+E02;
+             
+            return $string;
+
+            /*
+            
+
+            */
+        }
+
+
+
+
+
+        
+
 
 
 

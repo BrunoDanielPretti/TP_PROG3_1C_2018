@@ -8,7 +8,7 @@
         </div>
 
         <div class="panel-body">
-            <form class="form">
+            <form class="form" autocomplete="off">
                 <div class="form-group col-xs-10 col-sm-6" target="Alta">
                     <label for="">Usuario</label>                    
                     <div class="input-group">

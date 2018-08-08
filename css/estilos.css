@@ -21,6 +21,20 @@ th, td{
   -webkit-user-select: none; /* Chrome, Safari, and Opera */
   -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
   cursor: pointer;
+  text-align: center;  
+}
+.td-btn{
+  cursor: pointer;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px; 
+}
+.td-btn:hover{
+  color: #c4a337;
+}
+
+.td2{
+  cursor: default;
 }
 .input-group-addon{
   background-image:         linear-gradient(to bottom, #4d4432 0%, #382f1f 100%);
@@ -67,6 +81,11 @@ th, td{
     margin-bottom: 0;
     font-size: 16px;
     color: red;
+  }
+
+  .text-precio{
+    font-size: 30px;
+    text-align: center;
   }
 /*---------------------------  Tarjeta --------------------------*/
   .tarjeta{

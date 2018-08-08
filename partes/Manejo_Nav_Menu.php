@@ -56,6 +56,9 @@ EO2;
                             <li><a href="#" onclick="Prueba()" class="navbar-brand" id="">Prueba</a></li>                            
                         </ul>
                         <ul class="nav navbar-nav navbar-left">           
+                            <li><a href="#" onclick="Menu_Pedido()" class="navbar-brand" id="">+Pedido</a></li>                            
+                        </ul>
+                        <ul class="nav navbar-nav navbar-left">           
                             <li><a href="#" onclick="w3.sortHTML('#Tabla_General','.item', 'td:nth-child(2)')" class="navbar-brand" id="">Sort</a></li>                            
                         </ul>                                                                 
                         <ul class="nav navbar-nav navbar-right">                            

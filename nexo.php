@@ -34,7 +34,6 @@
 
 
 //---------------------------------  TOKENS  --------------------------------------------------//
-
     $app->get('/getNewToken', function(){
         $datos = array('juan' => 'rogelio','apellido' => 'peres', 'edad' => 33);    
         $token = AutentificadorJWT::CrearToken($datos);
@@ -203,6 +202,30 @@
 
     });
 
+//---------------------------------  PEDIDOS --------------------------------------------------//
+    $app->get('/MenuPedidos[/]', function(Request $request, Response $response){                
+        $LISTA_Mesas = Mesa::TraerTodasLasMesas();              
+        $LISTA_Productos = Producto::TraerTodosLosProductos();
+        $LISTA_Productos = Producto::HTML_Pedidos($LISTA_Productos);
+        if($LISTA_Mesas != false & $LISTA_Productos != false){            
+            $HTML_Menu = file_get_contents('partes/menu_NuevoPedido.php',TRUE);
+            $HTML_Tabla = file_get_contents('partes/Tabla_lista_productos.php',TRUE);
+            //$HTML_Tab =   file_get_contents('partes/empleados_tab.php',TRUE);
+            $envio = array('mesas'=>$LISTA_Mesas, "menu"=>$HTML_Menu, "productos"=>$LISTA_Productos,
+                            'tabla'=>$HTML_Tabla);
+            
+            echo json_encode($envio);                       
+        }else{
+            return $response->withStatus(400);
+        }           
+    });
+
+    $app->get('/ProductoPedido/{id}', function (Request $request, Response $response, $args) {        
+        $pID = $args['id'];
+        $resultado = Producto::HTML_Producto_Para_Pedido($pID);
+        echo $resultado;
+        
+    });
 
 //---------------------------------  PRUEBAS --------------------------------------------------//
     $app->get('/Prueba/{pToken}', function (Request $request, Response $response, $args) {        
@@ -220,7 +243,7 @@
     $app->get('/Prueba', function (Request $request, Response $response, $args) {             
         $resultado = Usuario::BuscarPorSesion("admin", "admin");
         //$resultado = json_decode($resultado);
-        echo $resultado->Sesion_log_date();
+        echo "asd";
         //var_dump($resultado);
     });
 
@@ -264,7 +287,8 @@
     });
 
 
-//---------------------------------------------------------------------------------
+
+    //---------------------------------------------------------------------------------
 $app->run();
 
 
